@@ -15,6 +15,8 @@ public:
 	void update();
 	void draw();
 
+	void loadBackground(string filename);
+
 	ofxBox2d & getBox2d();
 
 	vector<Target*> targets;
@@ -24,8 +26,11 @@ public:
 private:
 	ofxBox2d box2d;
 
+	ofImage background;
+
 	void setupGui();
 	ofxFloatSlider gravity;
+	ofxFloatSlider offsetX, offsetY, scale;
 };
 
 } /* namespace Box2dArena */

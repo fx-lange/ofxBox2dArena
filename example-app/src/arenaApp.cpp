@@ -14,6 +14,7 @@ void arenaApp::setup() {
 	ofDisableAntiAliasing();
 
 	arena.setup();
+	arena.loadBackground("wall.jpg");
 	canon.setup(&arena);
 }
 
@@ -29,6 +30,7 @@ void arenaApp::update() {
 
 //--------------------------------------------------------------
 void arenaApp::draw() {
+	ofPushStyle();
 	ofPushMatrix();
 
 	ofTranslate(ofGetWidth() / 2.f, ofGetHeight() / 2.f);
@@ -39,8 +41,10 @@ void arenaApp::draw() {
 	canon.debugDraw();
 
 	ofPopMatrix();
+	ofPopStyle();
 
 	if (bDrawGui) {
+		ofSetColor(255);
 		arena.gui.draw();
 		canon.gui.draw();
 	}

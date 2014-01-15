@@ -1,0 +1,18 @@
+<canon>
+	<density>3.025</density>
+	<bounce>0.53</bounce>
+	<friction>0.9</friction>
+	<radius>1129</radius>
+	<min_angle>45</min_angle>
+	<max_angle>315</max_angle>
+<arena>
+		<gravity>1.95</gravity>
+	<bg_offset_X>-5</bg_offset_X>
+		<bg_offset_Y>0</bg_offset_Y>
+		<bg_scale>0.99</bg_scale>
+	</arena>
+<canon/>
+	<offset_X>0</offset_X>
+	<offset_Y>0</offset_Y>
+	<attraction_amount>10</attraction_amount>
+</canon>
