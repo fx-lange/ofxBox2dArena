@@ -30,7 +30,7 @@ private:
 	list<Target*> targets;
 
 	void updateTargets();
-	bool isInside(float x,float y);
+	bool isInside(float x, float y);
 
 	ofImage background;
 

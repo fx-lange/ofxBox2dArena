@@ -27,7 +27,7 @@ void TargetCanon::setupGui() {
 	gui.add(maxAngle.setup("max angle", 360, 0, 360));
 	gui.add(centerOffX.setup("offset X", 0, -500, 500));
 	gui.add(centerOffY.setup("offset Y", 0, -500, 500));
-	gui.add(attractionAmt.setup("attraction amount",10,0,50));
+	gui.add(attractionAmt.setup("attraction amount", 10, 0, 50));
 	gui.loadFromFile("arena.xml");
 }
 
@@ -37,10 +37,8 @@ void TargetCanon::debugDraw() {
 	ofPushStyle();
 	ofSetColor(255, 0, 0);
 	for (int angle = minAngle; angle < maxAngle; angle += 10) {
-		float x = center.x + centerOffX
-				+ radius * cos(ofDegToRad(angle + 90));
-		float y = center.y + centerOffY
-				+ radius * sin(ofDegToRad(angle + 90));
+		float x = center.x + centerOffX + radius * cos(ofDegToRad(angle + 90));
+		float y = center.y + centerOffY + radius * sin(ofDegToRad(angle + 90));
 		ofEllipse(x, y, 10, 10);
 	}
 	ofPushStyle();
@@ -52,16 +50,15 @@ void TargetCanon::shootNextTarget() {
 	Target * target = new Target();
 
 	float angle = 90 + ofRandom(minAngle, maxAngle);
-	float tx = center.x + centerOffX
-			+ radius * cos(ofDegToRad(angle));
-	float ty = center.y + centerOffY
-			+ radius * sin(ofDegToRad(angle));
+	float tx = center.x + centerOffX + radius * cos(ofDegToRad(angle));
+	float ty = center.y + centerOffY + radius * sin(ofDegToRad(angle));
 
 	target->setPhysics(density, bounce, friction);
 	target->setup(arenaPtr->getBox2d().getWorld(), tx, ty, 30, 30); //TODO use type instead of w,h
 
 	//TODO add toCenter force
-	target->addAttractionPoint(ofPoint(center.x+centerOffX,center.y+centerOffY),
+	target->addAttractionPoint(
+			ofPoint(center.x + centerOffX, center.y + centerOffY),
 			attractionAmt); //TODO impulse instead of force?
 
 	arenaPtr->addTarget(target);

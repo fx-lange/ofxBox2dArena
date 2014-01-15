@@ -55,10 +55,10 @@ void arenaApp::draw() {
 		canon.gui.draw();
 	}
 	if (bDrawDebug) {
-		string msg ="";
+		string msg = "";
 		msg += "targets: " + ofToString(arena.targetCount());
-		ofSetColor(255,0,0);
-		ofDrawBitmapString(msg,50,50);
+		ofSetColor(255, 0, 0);
+		ofDrawBitmapString(msg, 50, 50);
 	}
 	ofPopStyle();
 }

@@ -35,34 +35,34 @@ void Arena::update() {
 	box2d.update();
 }
 
-void Arena::updateTargets(){
+void Arena::updateTargets() {
 	list<Target*>::iterator it = targets.begin();
-	for (; it != targets.end(); ) {
+	for (; it != targets.end();) {
 		Target * target = *it;
 //		float x = target->body->GetPosition().x / OFX_BOX2D_SCALE;
 //		float y = target->body->GetPosition().y / OFX_BOX2D_SCALE;
 		float x = target->getPosition().x;
 		float y = target->getPosition().y;
 
-		if(isInside(x,y)){
-			if(!target->bEnteredArena){
+		if (isInside(x, y)) {
+			if (!target->bEnteredArena) {
 				//is entering arena
 				target->bEnteredArena = true;
-				target->color.set(0,255,0);
+				target->color.set(0, 255, 0);
 			}
-		}else{
-			if(target->bEnteredArena){
+		} else {
+			if (target->bEnteredArena) {
 				//is leaving arena
-				if(!target->bHit){
+				if (!target->bHit) {
 					//TODO negative points
-					target->color.set(255,0,0);
-				}else{
+					target->color.set(255, 0, 0);
+				} else {
 					//TODO ?
 				}
 
 			}
 
-			if(y > destroyLevel){
+			if (y > destroyLevel) {
 				it = targets.erase(it);
 				continue;
 				delete target;
@@ -97,35 +97,35 @@ void Arena::draw() {
 	ofPopStyle();
 }
 
-void Arena::drawDebug(){
+void Arena::drawDebug() {
 	ofPushMatrix();
 	ofPushStyle();
 	ofSetRectMode(OF_RECTMODE_CENTER);
 	ofNoFill();
-	ofTranslate(ofGetWidth()/2.f,ofGetHeight()/2.f);
-	ofSetColor(255,0,0);
-	ofRect(0,0,width,height);
-	ofTranslate(0,-ofGetHeight()/2.f);
-	ofLine(-width/2.f,destroyLevel,width/2.f,destroyLevel);
+	ofTranslate(ofGetWidth() / 2.f, ofGetHeight() / 2.f);
+	ofSetColor(255, 0, 0);
+	ofRect(0, 0, width, height);
+	ofTranslate(0, -ofGetHeight() / 2.f);
+	ofLine(-width / 2.f, destroyLevel, width / 2.f, destroyLevel);
 	ofPopStyle();
 	ofPopMatrix();
 }
 
-bool Arena::isInside(float x, float y){
-	if(abs(x-ofGetWidth() * 0.5f) < width / 2.f
-			&& abs(y - ofGetHeight() * 0.5f) < height / 2.f){
+bool Arena::isInside(float x, float y) {
+	if (abs(x - ofGetWidth() * 0.5f) < width / 2.f
+			&& abs(y - ofGetHeight() * 0.5f) < height / 2.f) {
 		return true;
-	}else{
+	} else {
 		return false;
 	}
 }
 
-void Arena::addTarget(Target * target){
+void Arena::addTarget(Target * target) {
 	targets.push_back(target);
 }
 
-int Arena::targetCount(){
-	return (int)targets.size();
+int Arena::targetCount() {
+	return (int) targets.size();
 }
 
 void Arena::loadBackground(string filename) {
