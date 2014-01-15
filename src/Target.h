@@ -8,6 +8,11 @@ class Target: public ofxBox2dRect {
 public:
 	virtual ~Target();
 	Target();
+
+	virtual void draw();
+
+	bool bHit, bEnteredArena;
+	ofColor color;
 protected:
 
 };

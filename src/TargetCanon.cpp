@@ -13,7 +13,6 @@ TargetCanon::~TargetCanon() {
 
 void TargetCanon::setup(Arena * arena) {
 	arenaPtr = arena;
-	center.set(ofGetWidth() / 2.f, ofGetHeight() / 2.f);
 
 	setupGui();
 }
@@ -33,6 +32,8 @@ void TargetCanon::setupGui() {
 }
 
 void TargetCanon::debugDraw() {
+	ofPoint center(ofGetWidth() / 2.f, ofGetHeight() / 2.f);
+
 	ofPushStyle();
 	ofSetColor(255, 0, 0);
 	for (int angle = minAngle; angle < maxAngle; angle += 10) {
@@ -46,6 +47,8 @@ void TargetCanon::debugDraw() {
 }
 
 void TargetCanon::shootNextTarget() {
+	ofPoint center(ofGetWidth() / 2.f, ofGetHeight() / 2.f);
+
 	Target * target = new Target();
 
 	float angle = 90 + ofRandom(minAngle, maxAngle);
@@ -61,7 +64,7 @@ void TargetCanon::shootNextTarget() {
 	target->addAttractionPoint(ofPoint(center.x+centerOffX,center.y+centerOffY),
 			attractionAmt); //TODO impulse instead of force?
 
-	arenaPtr->targets.push_back(target);
+	arenaPtr->addTarget(target);
 }
 
 } /* namespace Box2dArena */

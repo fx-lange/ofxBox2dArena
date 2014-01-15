@@ -1,6 +1,7 @@
 #include "arenaApp.h"
 
 bool bDrawGui = true;
+bool bDrawDebug = true;
 
 bool eNextTarget = false;
 
@@ -33,26 +34,41 @@ void arenaApp::draw() {
 	ofPushStyle();
 	ofPushMatrix();
 
+	//TODO move camera instead of scaling everything!
 	ofTranslate(ofGetWidth() / 2.f, ofGetHeight() / 2.f);
 	ofScale(scale, scale);
 	ofTranslate(-ofGetWidth() / 2.f, -ofGetHeight() / 2.f);
 
 	arena.draw();
-	canon.debugDraw();
+	if (bDrawDebug) {
+		arena.drawDebug();
+		canon.debugDraw();
+	}
 
 	ofPopMatrix();
 	ofPopStyle();
 
+	ofPushStyle();
 	if (bDrawGui) {
 		ofSetColor(255);
 		arena.gui.draw();
 		canon.gui.draw();
 	}
+	if (bDrawDebug) {
+		string msg ="";
+		msg += "targets: " + ofToString(arena.targetCount());
+		ofSetColor(255,0,0);
+		ofDrawBitmapString(msg,50,50);
+	}
+	ofPopStyle();
 }
 
 //--------------------------------------------------------------
 void arenaApp::keyPressed(int key) {
 	switch (key) {
+	case 'd':
+		bDrawDebug = !bDrawDebug;
+		break;
 	case 'g':
 		bDrawGui = !bDrawGui;
 		break;

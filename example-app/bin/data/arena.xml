@@ -10,6 +10,9 @@
 	<bg_offset_X>-5</bg_offset_X>
 		<bg_offset_Y>0</bg_offset_Y>
 		<bg_scale>0.99</bg_scale>
+	<arena_width>1176</arena_width>
+		<arena_height>600</arena_height>
+		<destroy_level>1302</destroy_level>
 	</arena>
 <canon/>
 	<offset_X>0</offset_X>

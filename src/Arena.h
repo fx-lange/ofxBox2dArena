@@ -14,23 +14,30 @@ public:
 	void setup();
 	void update();
 	void draw();
+	void drawDebug();
 
 	void loadBackground(string filename);
 
-	ofxBox2d & getBox2d();
+	void addTarget(Target * target);
+	int targetCount();
 
-	vector<Target*> targets;
+	ofxBox2d & getBox2d();
 
 	ofxPanel gui;
 
 private:
 	ofxBox2d box2d;
+	list<Target*> targets;
+
+	void updateTargets();
+	bool isInside(float x,float y);
 
 	ofImage background;
 
 	void setupGui();
 	ofxFloatSlider gravity;
 	ofxFloatSlider offsetX, offsetY, scale;
+	ofxIntSlider width, height, destroyLevel;
 };
 
 } /* namespace Box2dArena */

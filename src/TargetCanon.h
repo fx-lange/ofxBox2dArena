@@ -17,7 +17,6 @@ public:
 	void shootNextTarget();
 
 	ofxPanel gui;
-	ofPoint center;
 
 protected:
 	Arena * arenaPtr;
