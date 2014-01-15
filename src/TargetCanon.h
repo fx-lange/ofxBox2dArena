@@ -25,7 +25,7 @@ protected:
 	ofxFloatSlider density, bounce, friction;
 	ofxFloatSlider centerOffX, centerOffY;
 	ofxFloatSlider radius, minAngle, maxAngle;
-	ofxFloatSlider attractionAmt;
+	ofxFloatSlider attractionAmt, randomX,randomY;
 };
 
 } /* namespace Box2dArena */
