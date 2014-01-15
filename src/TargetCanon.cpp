@@ -19,7 +19,7 @@ void TargetCanon::setup(Arena * arena) {
 
 void TargetCanon::setupGui() {
 	gui.setup("canon", "arena.xml", 600, 50);
-	gui.add(density.setup("density", 3, 0, 50));
+	gui.add(density.setup("density", 3, 0, 5));
 	gui.add(bounce.setup("bounce", 0.53, 0, 2));
 	gui.add(friction.setup("friction", 0.9, 0, 5));
 	gui.add(radius.setup("radius", 500, 100, 5000));
@@ -54,12 +54,13 @@ void TargetCanon::shootNextTarget() {
 	float ty = center.y + centerOffY + radius * sin(ofDegToRad(angle));
 
 	target->setPhysics(density, bounce, friction);
-	target->setup(arenaPtr->getBox2d().getWorld(), tx, ty, 30, 30); //TODO use type instead of w,h
+	target->setup(arenaPtr->getBox2d().getWorld(), tx, ty); //TODO use type instead of w,h
 
-	//TODO add toCenter force
 	target->addAttractionPoint(
 			ofPoint(center.x + centerOffX, center.y + centerOffY),
 			attractionAmt); //TODO impulse instead of force?
+	//TODO rotation
+	//TODO density to size factor
 
 	arenaPtr->addTarget(target);
 }
