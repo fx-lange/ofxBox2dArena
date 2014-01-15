@@ -1,0 +1,4 @@
+!example*/bin/libs/
+!example*/bin/data/*
+example*/bin/*
+example*/obj/*
