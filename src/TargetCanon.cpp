@@ -28,6 +28,7 @@ void TargetCanon::setupGui() {
 	gui.add(centerOffX.setup("offset X", 0, -500, 500));
 	gui.add(centerOffY.setup("offset Y", 0, -500, 500));
 	gui.add(attractionAmt.setup("attraction amount", 10, 0, 50));
+	gui.add(angularVel.setup("angular vel", 1, 0, 5));
 	gui.add(randomX.setup("random min", 50, 0, 400));
 	gui.add(randomY.setup("random max", 50, 0, 400));
 	gui.loadFromFile("arena.xml");
@@ -66,7 +67,7 @@ void TargetCanon::shootNextTarget() {
 	float aty = center.y + centerOffY + ofRandom(-randomY,randomY);
 
 	target->addAttractionPoint(atx, aty, attractionAmt); //TODO impulse instead of force?
-	//TODO rotation
+	target->body->SetAngularVelocity(ofRandom(angularVel));
 	//TODO density to size factor
 
 	arenaPtr->addTarget(target);
