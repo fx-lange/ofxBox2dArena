@@ -1,20 +1,15 @@
-/*
- * Target.h
- *
- *  Created on: Jan 15, 2014
- *      Author: felix
- */
+#include "ofxBox2dRect.h"
 
-#ifndef TARGET_H_
-#define TARGET_H_
+#pragma once
 
 namespace Box2dArena {
 
-class Target {
+class Target: public ofxBox2dRect {
 public:
 	virtual ~Target();
 	Target();
+protected:
+
 };
 
 } /* namespace Box2dArena */
-#endif /* TARGET_H_ */

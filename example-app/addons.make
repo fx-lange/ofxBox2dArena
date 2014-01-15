@@ -1,4 +1,3 @@
-ofxOpenCv
-ofxCvMotionTemplates
 ofxGui
 ofxBox2d
+ofxBox2dArena
