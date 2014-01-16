@@ -12,7 +12,7 @@ public:
 
 	void setup(Arena * arena);
 
-	void debugDraw();
+	void drawDebug();
 
 	void shootNextTarget();
 

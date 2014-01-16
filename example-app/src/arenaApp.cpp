@@ -3,7 +3,7 @@
 bool bDrawGui = true;
 bool bDrawDebug = true;
 
-bool eNextTarget = false;
+bool eNextTarget = true;
 
 float scale = 1.f;
 
@@ -17,6 +17,7 @@ void arenaApp::setup() {
 	arena.setup();
 	arena.loadBackground("wall.jpg");
 	canon.setup(&arena);
+	player.setup();
 }
 
 //--------------------------------------------------------------
@@ -27,6 +28,7 @@ void arenaApp::update() {
 	}
 
 	arena.update();
+	player.update();
 }
 
 //--------------------------------------------------------------
@@ -40,9 +42,12 @@ void arenaApp::draw() {
 	ofTranslate(-ofGetWidth() / 2.f, -ofGetHeight() / 2.f);
 
 	arena.draw();
+	player.draw();
+
 	if (bDrawDebug) {
 		arena.drawDebug();
-		canon.debugDraw();
+		canon.drawDebug();
+		player.drawDebug();
 	}
 
 	ofPopMatrix();
@@ -53,6 +58,7 @@ void arenaApp::draw() {
 		ofSetColor(255);
 		arena.gui.draw();
 		canon.gui.draw();
+		player.gui.draw();
 	}
 	if (bDrawDebug) {
 		string msg = "";

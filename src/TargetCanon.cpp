@@ -34,7 +34,7 @@ void TargetCanon::setupGui() {
 	gui.loadFromFile("arena.xml");
 }
 
-void TargetCanon::debugDraw() {
+void TargetCanon::drawDebug() {
 	ofPoint center(ofGetWidth() / 2.f, ofGetHeight() / 2.f);
 
 	ofPushStyle();

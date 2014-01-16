@@ -1,3 +1,5 @@
 ofxGui
 ofxBox2d
 ofxBox2dArena
+ofxKinect
+ofxOpenCv

@@ -21,4 +21,13 @@
 <random_min>192</random_min>
 	<random_max>193</random_max>
 <angular_vel>2.2</angular_vel>
+<player>
+		<kinect_near>242.25</kinect_near>
+		<kinect_far>205.275</kinect_far>
+		<opacity>127.5</opacity>
+	<pos_x>-50</pos_x>
+		<pos_y>-120</pos_y>
+		<width>1280</width>
+		<height>960</height>
+	</player>
 </canon>
