@@ -7,9 +7,9 @@
 	<max_angle>315</max_angle>
 <arena>
 		<gravity>1.95</gravity>
-	<bg_offset_X>-5</bg_offset_X>
-		<bg_offset_Y>0</bg_offset_Y>
-		<bg_scale>0.99</bg_scale>
+	<bg_offset_X>0</bg_offset_X>
+		<bg_offset_Y>-140</bg_offset_Y>
+		<bg_scale>1</bg_scale>
 	<arena_width>1176</arena_width>
 		<arena_height>600</arena_height>
 		<destroy_level>1302</destroy_level>

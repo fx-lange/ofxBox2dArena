@@ -30,6 +30,7 @@ void Player::setupGui() {
 	gui.add(nearThreshold.setup("kinect near", 0, 0, 255));
 	gui.add(farThreshold.setup("kinect far", 0, 0, 255));
 	gui.add(opacity.setup("opacity", 0, 0, 255));
+	gui.add(stepSize.setup("step size", 3, 1, 10));
 	gui.add(flip.setup("flip src"));
 	gui.add(posX.setup("pos x", 0, -1000, 1000));
 	gui.add(posY.setup("pos y", 0, -1000, 1000));
@@ -104,8 +105,8 @@ void Player::drawContour() {
 	for (int i = 0; i < (int) contourFinder.blobs.size(); i++) { //TODO smoothing!
 		ofxCvBlob & blob = contourFinder.blobs[i];
 		ofBeginShape();
-		for (int j = 0; j < blob.nPts; j++) {
-			ofVertex(blob.pts[j].x, blob.pts[j].y);
+		for (int j = 0; j < blob.nPts; j+=stepSize) {
+			ofCurveVertex(blob.pts[j].x, blob.pts[j].y);
 		}
 		ofEndShape();
 	}

@@ -34,9 +34,9 @@ private:
 	float kinectAngle;
 	ofxFloatSlider nearThreshold, farThreshold;
 	ofxFloatSlider opacity;
-
-	ofxFloatSlider posX, posY, width, height;
+	ofxIntSlider stepSize;
 	ofxToggle flip;
+	ofxFloatSlider posX, posY, width, height;
 
 	ofxCvContourFinder contourFinder;
 };
