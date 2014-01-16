@@ -32,7 +32,7 @@ void Target::setup(b2World * b2dworld, float x, float y) {
 	}
 	int dice = ofRandom(0, images.size());
 	img = &images[dice];
-	brokenImages = &brokenImages[dice];
+	brokenImg = &brokenImages[dice];
 	ofxBox2dRect::setup(b2dworld, x, y, img->width, img->height); //TODO percentage of size?
 }
 

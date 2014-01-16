@@ -124,6 +124,10 @@ void Arena::addTarget(Target * target) {
 	targets.push_back(target);
 }
 
+list<Target*> & Arena::getTargets(){
+	return targets;
+}
+
 int Arena::targetCount() {
 	return (int) targets.size();
 }

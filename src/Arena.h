@@ -19,6 +19,7 @@ public:
 	void loadBackground(string filename);
 
 	void addTarget(Target * target);
+	list<Target*> & getTargets();
 	int targetCount();
 
 	ofxBox2d & getBox2d();

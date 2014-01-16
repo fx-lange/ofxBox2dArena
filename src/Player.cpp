@@ -3,13 +3,15 @@
 namespace Box2dArena {
 
 Player::Player() :
-	kinectAngle(0){
+		kinectAngle(0), arenaPtr(NULL) {
 }
 
 Player::~Player() {
 }
 
-void Player::setup() {
+void Player::setup(Arena * arena) {
+	arenaPtr = arena;
+
 	kinect.setRegistration(true);
 	kinect.init();
 	kinect.open();
@@ -43,7 +45,7 @@ void Player::setupGui() {
 void Player::update() {
 
 	updateKinect();
-
+	updateForces();
 }
 
 void Player::updateKinect() {
@@ -78,6 +80,21 @@ void Player::updateKinect() {
 	}
 }
 
+void Player::updateForces() {
+	list<Target*> & targets = arenaPtr->getTargets();
+	list<Target*>::iterator it = targets.begin();
+	if (ofGetMousePressed()) {
+		ofVec2f mouse(ofGetMouseX(), ofGetMouseY());
+		for (; it != targets.end(); ++it) {
+			float dis = mouse.distance((*it)->getPosition());
+			if (dis < 200){
+				(*it)->addRepulsionForce(mouse, 9);
+				(*it)->bHit = true;
+			}
+		}
+	}
+}
+
 void Player::draw() {
 	drawContour();
 }
@@ -106,7 +123,7 @@ void Player::drawContour() {
 	for (int i = 0; i < (int) contourFinder.blobs.size(); i++) { //TODO smoothing!
 		ofxCvBlob & blob = contourFinder.blobs[i];
 		ofBeginShape();
-		for (int j = 0; j < blob.nPts; j+=stepSize) {
+		for (int j = 0; j < blob.nPts; j += stepSize) {
 			ofCurveVertex(blob.pts[j].x, blob.pts[j].y);
 		}
 		ofEndShape();
@@ -120,7 +137,7 @@ void Player::drawDebug() {
 	ofPushStyle();
 	ofEnableAlphaBlending();
 	ofSetColor(255, 255, 255, 50);
-	ofSetRectMode(OF_RECTMODE_CENTER);
+	ofSetRectMode (OF_RECTMODE_CENTER);
 	ofPushMatrix();
 	ofPushStyle();
 	ofTranslate(ofGetWidth() / 2.f, ofGetHeight() / 2.f);
@@ -129,7 +146,7 @@ void Player::drawDebug() {
 	ofPopStyle();
 }
 
-void Player::changeKinectAngle(int diff){
+void Player::changeKinectAngle(int diff) {
 	kinectAngle += diff;
 	kinect.setCameraTiltAngle(kinectAngle);
 }

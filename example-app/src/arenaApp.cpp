@@ -17,7 +17,7 @@ void arenaApp::setup() {
 	arena.setup();
 	arena.loadBackground("wall.jpg");
 	canon.setup(&arena);
-	player.setup();
+	player.setup(&arena);
 }
 
 //--------------------------------------------------------------

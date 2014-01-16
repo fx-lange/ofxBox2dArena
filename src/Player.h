@@ -1,6 +1,7 @@
 #include "ofxKinect.h"
 #include "ofxOpenCv.h"
 #include "ofxGui.h"
+#include "Arena.h"
 
 #pragma once
 
@@ -11,7 +12,7 @@ public:
 	Player();
 	virtual ~Player();
 
-	void setup();
+	void setup(Arena * arena);
 	void setupGui();
 	void update();
 
@@ -22,8 +23,8 @@ public:
 
 	ofxPanel gui;
 private:
-
 	void updateKinect();
+	void updateForces();
 	void drawContour();
 
 	ofxKinect kinect;
@@ -41,6 +42,8 @@ private:
 	ofxFloatSlider posX, posY, width, height;
 
 	ofxCvContourFinder contourFinder;
+
+	Arena * arenaPtr;
 };
 
 } /* namespace Box2dArena */
