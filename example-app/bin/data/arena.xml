@@ -8,7 +8,7 @@
 <arena>
 		<gravity>1.95</gravity>
 	<bg_offset_X>0</bg_offset_X>
-		<bg_offset_Y>-140</bg_offset_Y>
+		<bg_offset_Y>55</bg_offset_Y>
 		<bg_scale>1</bg_scale>
 	<arena_width>1176</arena_width>
 		<arena_height>600</arena_height>
@@ -24,11 +24,13 @@
 <player>
 		<kinect_near>242.25</kinect_near>
 		<kinect_far>205.275</kinect_far>
-		<opacity>127.5</opacity>
+		<opacity>220.575</opacity>
 	<pos_x>-50</pos_x>
 		<pos_y>-120</pos_y>
 		<width>1280</width>
 		<height>960</height>
 	<UnknownName>1</UnknownName>
+	<step_size>3</step_size>
+		<test_force>10</test_force>
 	</player>
 </canon>

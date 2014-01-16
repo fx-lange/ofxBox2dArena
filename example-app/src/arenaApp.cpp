@@ -15,7 +15,7 @@ void arenaApp::setup() {
 	ofDisableAntiAliasing();
 
 	arena.setup();
-	arena.loadBackground("wall.jpg");
+	arena.loadBackground("arena_wall.png");
 	canon.setup(&arena);
 	player.setup(&arena);
 }

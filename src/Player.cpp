@@ -125,7 +125,8 @@ void Player::drawContour() {
 		ofxCvBlob & blob = contourFinder.blobs[i];
 		ofBeginShape();
 		for (int j = 0; j < blob.nPts; j += stepSize) {
-			ofCurveVertex(blob.pts[j].x, blob.pts[j].y);
+//			ofCurveVertex(blob.pts[j].x, blob.pts[j].y);
+			ofVertex(blob.pts[j].x, blob.pts[j].y);
 		}
 		ofEndShape();
 	}
