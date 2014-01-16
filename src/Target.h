@@ -18,8 +18,9 @@ public:
 	bool bHit, bEnteredArena;
 	ofColor color;
 protected:
-	ofImage * img;
+	ofImage *img, *brokenImg;
 	static vector<ofImage> images;
+	static vector<ofImage> brokenImages;
 	static bool imagesLoaded;
 };
 

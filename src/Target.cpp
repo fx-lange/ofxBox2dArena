@@ -3,32 +3,41 @@
 namespace Box2dArena {
 
 vector<ofImage> Target::images = vector<ofImage>();
+vector<ofImage> Target::brokenImages = vector<ofImage>();
 bool Target::imagesLoaded = false;
 
-void Target::loadImages(){
-	ofDirectory dir;
-	dir.open("targets");
-	dir.listDir();
-	for(int i=0;i<(int)dir.size();++i){
+void Target::loadImages() {
+	ofDirectory targetsDir;
+	targetsDir.open("targets");
+	targetsDir.listDir();
+	for (int i = 0; i < (int) targetsDir.size(); ++i) {
+		ofDirectory dir;
+		dir.open(targetsDir.getPath(i));
+		dir.listDir();
+		dir.sort();
 		ofImage img;
-		img.loadImage(dir.getFile(i));
-		img.resize(img.width/4,img.height/4);
+		img.loadImage(dir.getFile(0));
+		img.resize(img.width / 2, img.height / 2);
 		images.push_back(img);
+		img.loadImage(dir.getFile(1));
+		img.resize(img.width / 2, img.height / 2);
+		brokenImages.push_back(img);
 	}
 }
 
-void Target::setup(b2World * b2dworld, float x, float y){
-	if(!imagesLoaded){
+void Target::setup(b2World * b2dworld, float x, float y) {
+	if (!imagesLoaded) {
 		imagesLoaded = true;
 		loadImages();
 	}
-	int dice = ofRandom(0,images.size());
+	int dice = ofRandom(0, images.size());
 	img = &images[dice];
-	ofxBox2dRect::setup(b2dworld,x,y,img->width,img->height); //TODO percentage of size?
+	brokenImages = &brokenImages[dice];
+	ofxBox2dRect::setup(b2dworld, x, y, img->width, img->height); //TODO percentage of size?
 }
 
 Target::Target() :
-		bHit(false), bEnteredArena(false), img(NULL) {
+		bHit(false), bEnteredArena(false), img(NULL), brokenImg(NULL) {
 	color.set(255, 255, 255);
 }
 
@@ -37,15 +46,16 @@ Target::~Target() {
 
 void Target::draw() {
 	ofSetColor(color);
-	if(bHit)
-		ofxBox2dRect::draw();
-	ofVec2f pos = ofxBox2dBaseShape::getPosition();
 	ofPushMatrix();
 	ofPushStyle();
 	ofTranslate(ofxBox2dBaseShape::getPosition());
 	ofRotate(getRotation());
 	ofSetRectMode(OF_RECTMODE_CENTER);
-	img->draw(0,0);
+	if (bHit) {
+		brokenImg->draw(0, 0);
+	} else {
+		img->draw(0, 0);
+	}
 	ofPopStyle();
 	ofPopMatrix();
 }
