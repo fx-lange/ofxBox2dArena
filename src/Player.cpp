@@ -131,6 +131,7 @@ void Player::drawDebug() {
 
 void Player::changeKinectAngle(int diff){
 	kinectAngle += diff;
+	kinect.setCameraTiltAngle(kinectAngle);
 }
 
 } /* namespace Box2dArena */
