@@ -30,10 +30,10 @@ void Player::setupGui() {
 	gui.add(nearThreshold.setup("kinect near", 0, 0, 255));
 	gui.add(farThreshold.setup("kinect far", 0, 0, 255));
 	gui.add(opacity.setup("opacity", 0, 0, 255));
-	gui.add(posX.setup("pos x",0,-1000,1000));
-	gui.add(posY.setup("pos y",0,-1000,1000));
-	gui.add(width.setup("width",0,0,2000));
-	gui.add(height.setup("height",0,0,2000));
+	gui.add(posX.setup("pos x", 0, -1000, 1000));
+	gui.add(posY.setup("pos y", 0, -1000, 1000));
+	gui.add(width.setup("width", 800, 0, 2000));
+	gui.add(height.setup("height", 600, 0, 2000));
 	gui.loadFromFile("arena.xml");
 }
 
@@ -80,7 +80,6 @@ void Player::drawContour() {
 	ofEnableAlphaBlending();
 	ofFill();
 	ofSetColor(0, 0, 0, opacity);
-
 
 	float cWidth = contourFinder.getWidth();
 	float cHeight = contourFinder.getHeight();
