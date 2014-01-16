@@ -18,6 +18,8 @@ public:
 	void draw();
 	void drawDebug();
 
+	void changeKinectAngle(int diff);
+
 	ofxPanel gui;
 private:
 

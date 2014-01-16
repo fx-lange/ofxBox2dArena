@@ -2,7 +2,8 @@
 
 namespace Box2dArena {
 
-Player::Player() {
+Player::Player() :
+	kinectAngle(0){
 }
 
 Player::~Player() {
@@ -126,6 +127,10 @@ void Player::drawDebug() {
 	binaryImg.draw(0, 0);
 	ofPopMatrix();
 	ofPopStyle();
+}
+
+void Player::changeKinectAngle(int diff){
+	kinectAngle += diff;
 }
 
 } /* namespace Box2dArena */

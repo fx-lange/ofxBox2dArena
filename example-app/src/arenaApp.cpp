@@ -72,6 +72,12 @@ void arenaApp::draw() {
 //--------------------------------------------------------------
 void arenaApp::keyPressed(int key) {
 	switch (key) {
+	case 'q':
+		player.changeKinectAngle(1);
+		break;
+	case 'a':
+		player.changeKinectAngle(-1);
+		break;
 	case 'd':
 		bDrawDebug = !bDrawDebug;
 		break;
