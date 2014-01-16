@@ -36,6 +36,7 @@ private:
 	ofxFloatSlider opacity;
 
 	ofxFloatSlider posX, posY, width, height;
+	ofxToggle flip;
 
 	ofxCvContourFinder contourFinder;
 };

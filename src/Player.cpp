@@ -30,6 +30,7 @@ void Player::setupGui() {
 	gui.add(nearThreshold.setup("kinect near", 0, 0, 255));
 	gui.add(farThreshold.setup("kinect far", 0, 0, 255));
 	gui.add(opacity.setup("opacity", 0, 0, 255));
+	gui.add(flip.setup("flip src"));
 	gui.add(posX.setup("pos x", 0, -1000, 1000));
 	gui.add(posY.setup("pos y", 0, -1000, 1000));
 	gui.add(width.setup("width", 800, 0, 2000));
@@ -50,6 +51,10 @@ void Player::updateKinect() {
 
 		grayImg.setFromPixels(kinect.getDepthPixels(), kinect.width,
 				kinect.height);
+		if (flip) {
+			cvFlip(grayImg.getCvImage(), grayImg.getCvImage(), 1);
+			grayImg.flagImageChanged();
+		}
 
 		// we do two thresholds - one for the far plane and one for the near plane
 		// we then do a cvAnd to get the pixels which are a union of the two thresholds
