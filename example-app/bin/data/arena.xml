@@ -1,5 +1,5 @@
 <canon>
-	<density>0.1</density>
+	<density>1.5</density>
 	<bounce>0.53</bounce>
 	<friction>0.9</friction>
 	<radius>1129</radius>
@@ -17,7 +17,7 @@
 <canon/>
 	<offset_X>0</offset_X>
 	<offset_Y>0</offset_Y>
-	<attraction_amount>14.25</attraction_amount>
+	<attraction_amount>24.5</attraction_amount>
 <random_min>192</random_min>
 	<random_max>193</random_max>
 <angular_vel>2.2</angular_vel>

@@ -44,10 +44,14 @@ Target::Target() :
 Target::~Target() {
 }
 
-void Target::draw() {
-	ofSetColor(color);
+void Target::draw(bool debug) {
 	ofPushMatrix();
 	ofPushStyle();
+	if(debug){
+		ofSetColor(color);
+	}else{
+		ofSetColor(255,255,255);
+	}
 	ofTranslate(ofxBox2dBaseShape::getPosition());
 	ofRotate(getRotation());
 	ofSetRectMode(OF_RECTMODE_CENTER);

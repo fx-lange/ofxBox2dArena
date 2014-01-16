@@ -13,7 +13,7 @@ public:
 
 	static void loadImages();
 
-	virtual void draw();
+	virtual void draw(bool debug = false);
 
 	bool bHit, bEnteredArena;
 	ofColor color;

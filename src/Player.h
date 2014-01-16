@@ -27,7 +27,9 @@ private:
 	void updateForces();
 	void drawContour();
 
+	// --- kinect visualization
 	ofxKinect kinect;
+	ofxCvContourFinder contourFinder;
 	ofxCvColorImage colorImg;
 	ofxCvGrayscaleImage grayImg;
 	ofxCvGrayscaleImage binaryImg;
@@ -41,9 +43,10 @@ private:
 	ofxToggle flip;
 	ofxFloatSlider posX, posY, width, height;
 
-	ofxCvContourFinder contourFinder;
+	// --- forces
 
 	Arena * arenaPtr;
+	ofxFloatSlider testForce;
 };
 
 } /* namespace Box2dArena */

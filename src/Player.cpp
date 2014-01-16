@@ -39,6 +39,7 @@ void Player::setupGui() {
 	gui.add(posY.setup("pos y", 0, -1000, 1000));
 	gui.add(width.setup("width", 800, 0, 2000));
 	gui.add(height.setup("height", 600, 0, 2000));
+	gui.add(testForce.setup("test force", 10, 0, 100));
 	gui.loadFromFile("arena.xml");
 }
 
@@ -88,7 +89,7 @@ void Player::updateForces() {
 		for (; it != targets.end(); ++it) {
 			float dis = mouse.distance((*it)->getPosition());
 			if (dis < 200){
-				(*it)->addRepulsionForce(mouse, 9);
+				(*it)->addRepulsionForce(mouse, testForce);
 				(*it)->bHit = true;
 			}
 		}

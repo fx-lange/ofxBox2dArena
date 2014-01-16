@@ -63,6 +63,7 @@ void arenaApp::draw() {
 	if (bDrawDebug) {
 		string msg = "";
 		msg += "targets: " + ofToString(arena.targetCount());
+		msg += "\nfps: " + ofToString(ofGetFrameRate());
 		ofSetColor(255, 0, 0);
 		ofDrawBitmapString(msg, 50, 50);
 	}
