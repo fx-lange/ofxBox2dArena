@@ -36,4 +36,7 @@
 		<curved_vertex>1</curved_vertex>
 		<flip_src>1</flip_src>
 	</player>
+<game>
+		<targets_per_sec>5.025</targets_per_sec>
+	</game>
 </canon>

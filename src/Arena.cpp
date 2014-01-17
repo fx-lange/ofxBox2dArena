@@ -64,8 +64,8 @@ void Arena::updateTargets() {
 
 			if (y > destroyLevel) {
 				it = targets.erase(it);
-				continue;
 				delete target;
+				continue;
 				//TODO check if everything gets deleted (breakpoint@destructors)
 			}
 		}
