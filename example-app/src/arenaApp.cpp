@@ -58,9 +58,10 @@ void arenaApp::draw() {
 	ofPushStyle();
 	if (bDrawGui) {
 		ofSetColor(255);
+		ofSetRectMode(OF_RECTMODE_CORNER);
 		arena.gui.draw();
 		canon.gui.draw();
-		player.gui.draw();
+		player.drawGui();
 		game.gui.draw();
 	}
 	if (bDrawDebug) {

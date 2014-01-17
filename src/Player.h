@@ -37,7 +37,7 @@ private:
 	ofxCvGrayscaleImage grayThreshNear;
 	ofxCvGrayscaleImage grayThreshFar;
 
-	ofxPanel gui;
+	ofxPanel gui, contour, motionPanel;
 	ofxFloatSlider kinectAngle;
 	ofxFloatSlider nearThreshold, farThreshold;
 	ofxFloatSlider opacity, simplify;

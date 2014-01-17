@@ -22,21 +22,38 @@
 	<random_max>193</random_max>
 <angular_vel>2.2</angular_vel>
 <player>
-		<kinect_near>242.25</kinect_near>
-		<kinect_far>73.95</kinect_far>
-		<opacity>175.95</opacity>
-	<pos_x>-50</pos_x>
-		<pos_y>-120</pos_y>
-		<width>1280</width>
-		<height>960</height>
-	<UnknownName>1</UnknownName>
-	<step_size>1</step_size>
-		<test_force>56</test_force>
-	<simplify>4.50077</simplify>
-		<curved_vertex>1</curved_vertex>
 		<flip_src>1</flip_src>
+	<contour>
+			<kinect_tilt>10.2653</kinect_tilt>
+			<kinect_near>243.291</kinect_near>
+			<kinect_far>75.4592</kinect_far>
+			<opacity>165.23</opacity>
+			<step_size>1</step_size>
+			<simplify>3.98039</simplify>
+			<curved_vertex>0</curved_vertex>
+			<pos_x>-51.0204</pos_x>
+			<pos_y>-122.449</pos_y>
+			<width>1285.71</width>
+			<height>969.388</height>
+		</contour>
+		<motion>
+			<test_force>55.6122</test_force>
+		</motion>
 	</player>
 <game>
-		<targets_per_sec>5.025</targets_per_sec>
+		<targets_per_sec>1.5</targets_per_sec>
 	</game>
+<contour>
+		<kinect_tilt>10.2653</kinect_tilt>
+		<kinect_near>147.015</kinect_near>
+		<kinect_far>117.092</kinect_far>
+		<opacity>165.23</opacity>
+		<step_size>1</step_size>
+		<simplify>3.98039</simplify>
+		<curved_vertex>0</curved_vertex>
+		<pos_x>-51.0204</pos_x>
+		<pos_y>-122.449</pos_y>
+		<width>1285.71</width>
+		<height>969.388</height>
+	</contour>
 </canon>

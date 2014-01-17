@@ -3,7 +3,7 @@
 namespace Box2dArena {
 
 Player::Player() :
-		kinectAngle(0), arenaPtr(NULL) {
+		kinectAngle(0), arenaPtr(NULL), motion(NULL) {
 }
 
 Player::~Player() {
@@ -19,8 +19,9 @@ void Player::setup(Arena * arena) {
 	kinectAngle = 0;
 	kinect.setCameraTiltAngle(kinectAngle);
 
-	motion = new ofxCvMotionTemplates(kinect.width,kinect.height);
+	motion = new ofxCvMotionTemplates(kinect.width, kinect.height);
 	motion->setup();
+	motion->gui.setPosition(60, 400);
 
 	colorImg.allocate(kinect.width, kinect.height);
 	binaryImg.allocate(kinect.width, kinect.height);
@@ -33,19 +34,23 @@ void Player::setup(Arena * arena) {
 
 void Player::setupGui() {
 	gui.setup("player", "arena.xml", 50, 60);
-	gui.add(kinectAngle.setup("kinect tilt", 0, -30, 30));
-	gui.add(nearThreshold.setup("kinect near", 0, 0, 255));
-	gui.add(farThreshold.setup("kinect far", 0, 0, 255));
-	gui.add(opacity.setup("opacity", 0, 0, 255));
-	gui.add(stepSize.setup("step size", 3, 1, 10));
-	gui.add(simplify.setup("simplify", 1, 0.001, 20));
-	gui.add(bDrawCurved.setup("curved vertex", false));
 	gui.add(bFlip.setup("flip src", false));
-	gui.add(posX.setup("pos x", 0, -1000, 1000));
-	gui.add(posY.setup("pos y", 0, -1000, 1000));
-	gui.add(width.setup("width", 800, 0, 2000));
-	gui.add(height.setup("height", 600, 0, 2000));
-	gui.add(testForce.setup("test force", 10, 0, 100));
+	contour.setup("contour");
+	contour.add(kinectAngle.setup("kinect tilt", 0, -30, 30));
+	contour.add(nearThreshold.setup("kinect near", 0, 0, 255));
+	contour.add(farThreshold.setup("kinect far", 0, 0, 255));
+	contour.add(opacity.setup("opacity", 0, 0, 255));
+	contour.add(stepSize.setup("step size", 3, 1, 10));
+	contour.add(simplify.setup("simplify", 1, 0.001, 20));
+	contour.add(bDrawCurved.setup("curved vertex", false));
+	contour.add(posX.setup("pos x", 0, -1000, 1000));
+	contour.add(posY.setup("pos y", 0, -1000, 1000));
+	contour.add(width.setup("width", 800, 0, 2000));
+	contour.add(height.setup("height", 600, 0, 2000));
+	gui.add(&contour);
+	motionPanel.setup("motion");
+	motionPanel.add(testForce.setup("test force", 10, 0, 100));
+	gui.add(&motionPanel);
 	gui.loadFromFile("arena.xml");
 }
 
@@ -88,14 +93,29 @@ void Player::updateKinect() {
 }
 
 void Player::updateForces() {
+	motion->calculateMotions(binaryImg);
+
 	list<Target*> & targets = arenaPtr->getTargets();
 	list<Target*>::iterator it = targets.begin();
+
+
 	if (ofGetMousePressed()) {
 		ofVec2f mouse(ofGetMouseX(), ofGetMouseY());
 		for (; it != targets.end(); ++it) {
 			float dis = mouse.distance((*it)->getPosition());
 			if (dis < 200) {
 				(*it)->addRepulsionForce(mouse, testForce);
+				(*it)->bHit = true;
+			}
+		}
+	}
+
+	vector <ofxCvMotionBlob> & motions = motion->getLocalMotions();
+	for(int i=0;i < (int)motions.size(); i++){
+		for (it = targets.begin(); it != targets.end(); ++it) {
+			float dis = motions[i].centroid.distance((*it)->getPosition());
+			if (dis < 200) {
+				(*it)->addRepulsionForce(motions[i].centroid, testForce);
 				(*it)->bHit = true;
 			}
 		}
@@ -165,9 +185,9 @@ void Player::drawDebug() {
 	ofPopStyle();
 }
 
-void Player::drawGui(){
+void Player::drawGui() {
 	gui.draw();
-	motion.gui.draw();
+	motion->gui.draw();
 }
 
 void Player::changeKinectAngle(int diff) {
