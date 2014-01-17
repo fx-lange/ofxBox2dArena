@@ -35,8 +35,8 @@ void Player::setupGui() {
 	gui.add(opacity.setup("opacity", 0, 0, 255));
 	gui.add(stepSize.setup("step size", 3, 1, 10));
 	gui.add(simplify.setup("simplify", 1, 0.001, 20));
-	gui.add(curved.setup("curved vertex",false));
-	gui.add(flip.setup("flip src",false));
+	gui.add(bDrawCurved.setup("curved vertex", false));
+	gui.add(bFlip.setup("flip src", false));
 	gui.add(posX.setup("pos x", 0, -1000, 1000));
 	gui.add(posY.setup("pos y", 0, -1000, 1000));
 	gui.add(width.setup("width", 800, 0, 2000));
@@ -58,7 +58,7 @@ void Player::updateKinect() {
 
 		grayImg.setFromPixels(kinect.getDepthPixels(), kinect.width,
 				kinect.height);
-		if (flip) {
+		if (bFlip) {
 			cvFlip(grayImg.getCvImage(), grayImg.getCvImage(), 1);
 			grayImg.flagImageChanged();
 		}
@@ -77,7 +77,7 @@ void Player::updateKinect() {
 		//TODO /erode derode?!
 
 		contourFinder.findContours(binaryImg, 10,
-				(kinect.width * kinect.height) / 2, 20, true, true);		//TODO GUI
+				(kinect.width * kinect.height) / 2, 20, true, true);//TODO GUI
 		//TODO holes! learning opencv 237!
 	}
 }
@@ -89,7 +89,7 @@ void Player::updateForces() {
 		ofVec2f mouse(ofGetMouseX(), ofGetMouseY());
 		for (; it != targets.end(); ++it) {
 			float dis = mouse.distance((*it)->getPosition());
-			if (dis < 200){
+			if (dis < 200) {
 				(*it)->addRepulsionForce(mouse, testForce);
 				(*it)->bHit = true;
 			}
@@ -128,16 +128,16 @@ void Player::drawContour() {
 		line.clear();
 		line.addVertices(blob.pts);
 		line.simplify(simplify);
-		if(blob.hole){
-			ofSetColor(100,100,100,opacity);
-		}else{
+		if (blob.hole) {
+			ofSetColor(100, 100, 100, opacity);
+		} else {
 			ofSetColor(0, 0, 0, opacity);
 		}
 		ofBeginShape();
-		for (int j = 0; j < (int)line.size(); j += stepSize) {
-			if(curved){
+		for (int j = 0; j < (int) line.size(); j += stepSize) {
+			if (bDrawCurved) {
 				ofCurveVertex(line[j].x, line[j].y);
-			}else{
+			} else {
 				ofVertex(line[j].x, line[j].y);
 			}
 		}
@@ -152,7 +152,7 @@ void Player::drawDebug() {
 	ofPushStyle();
 	ofEnableAlphaBlending();
 	ofSetColor(255, 255, 255, 50);
-	ofSetRectMode (OF_RECTMODE_CENTER);
+	ofSetRectMode(OF_RECTMODE_CENTER);
 	ofPushMatrix();
 	ofPushStyle();
 	ofTranslate(ofGetWidth() / 2.f, ofGetHeight() / 2.f);

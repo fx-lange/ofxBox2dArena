@@ -40,7 +40,7 @@ private:
 	ofxFloatSlider nearThreshold, farThreshold;
 	ofxFloatSlider opacity, simplify;
 	ofxIntSlider stepSize;
-	ofxToggle flip, curved;
+	ofxToggle bFlip, bDrawCurved;
 	ofxFloatSlider posX, posY, width, height;
 
 	// --- forces
