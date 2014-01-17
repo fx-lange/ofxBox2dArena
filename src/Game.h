@@ -1,3 +1,4 @@
+#include "ofxGui.h"
 #include "TargetCanon.h"
 
 #pragma once
@@ -12,7 +13,15 @@ public:
 	void setup(TargetCanon * canon);
 	void update();
 
+	ofxPanel gui;
+
 private:
+	void setupGui();
+
+	ofxFloatSlider targetsPerSec;
+	float targetsToShoot;
+	long tLastUpdate;
+
 	TargetCanon * canonPtr;
 };
 
