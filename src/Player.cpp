@@ -34,7 +34,9 @@ void Player::setupGui() {
 	gui.add(farThreshold.setup("kinect far", 0, 0, 255));
 	gui.add(opacity.setup("opacity", 0, 0, 255));
 	gui.add(stepSize.setup("step size", 3, 1, 10));
-	gui.add(flip.setup("flip src"));
+	gui.add(simplify.setup("simplify", 1, 0.001, 20));
+	gui.add(curved.setup("curved vertex",false));
+	gui.add(flip.setup("flip src",false));
 	gui.add(posX.setup("pos x", 0, -1000, 1000));
 	gui.add(posY.setup("pos y", 0, -1000, 1000));
 	gui.add(width.setup("width", 800, 0, 2000));
@@ -72,12 +74,11 @@ void Player::updateKinect() {
 				binaryImg.getCvImage(), NULL);
 		binaryImg.flagImageChanged();
 		//TODO try both thresholds on binaryImg without far&near
-		//TODO mirroring
 		//TODO /erode derode?!
 
 		contourFinder.findContours(binaryImg, 10,
-				(kinect.width * kinect.height) / 2, 20, false);		//TODO GUI
-		//TODO holes!
+				(kinect.width * kinect.height) / 2, 20, true, true);		//TODO GUI
+		//TODO holes! learning opencv 237!
 	}
 }
 
@@ -121,14 +122,26 @@ void Player::drawContour() {
 	ofTranslate(posX, posY);
 	ofScale(scalex, scaley, 0.0);
 
+	ofPolyline line;
 	for (int i = 0; i < (int) contourFinder.blobs.size(); i++) { //TODO smoothing!
 		ofxCvBlob & blob = contourFinder.blobs[i];
-		ofBeginShape();
-		for (int j = 0; j < blob.nPts; j += stepSize) {
-//			ofCurveVertex(blob.pts[j].x, blob.pts[j].y);
-			ofVertex(blob.pts[j].x, blob.pts[j].y);
+		line.clear();
+		line.addVertices(blob.pts);
+		line.simplify(simplify);
+		if(blob.hole){
+			ofSetColor(100,100,100,opacity);
+		}else{
+			ofSetColor(0, 0, 0, opacity);
 		}
-		ofEndShape();
+		ofBeginShape();
+		for (int j = 0; j < (int)line.size(); j += stepSize) {
+			if(curved){
+				ofCurveVertex(line[j].x, line[j].y);
+			}else{
+				ofVertex(line[j].x, line[j].y);
+			}
+		}
+		ofEndShape(false);
 	}
 	ofPopMatrix();
 

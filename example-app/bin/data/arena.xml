@@ -1,15 +1,15 @@
 <canon>
 	<density>1.5</density>
 	<bounce>0.53</bounce>
-	<friction>0.9</friction>
+	<friction>2</friction>
 	<radius>1129</radius>
 	<min_angle>45</min_angle>
 	<max_angle>315</max_angle>
 <arena>
 		<gravity>1.95</gravity>
-	<bg_offset_X>0</bg_offset_X>
-		<bg_offset_Y>55</bg_offset_Y>
-		<bg_scale>1</bg_scale>
+	<bg_offset_X>15</bg_offset_X>
+		<bg_offset_Y>15</bg_offset_Y>
+		<bg_scale>0.69</bg_scale>
 	<arena_width>1176</arena_width>
 		<arena_height>600</arena_height>
 		<destroy_level>1302</destroy_level>
@@ -18,19 +18,22 @@
 	<offset_X>0</offset_X>
 	<offset_Y>0</offset_Y>
 	<attraction_amount>24.5</attraction_amount>
-<random_min>192</random_min>
+<random_min>232</random_min>
 	<random_max>193</random_max>
 <angular_vel>2.2</angular_vel>
 <player>
 		<kinect_near>242.25</kinect_near>
-		<kinect_far>205.275</kinect_far>
-		<opacity>220.575</opacity>
+		<kinect_far>73.95</kinect_far>
+		<opacity>175.95</opacity>
 	<pos_x>-50</pos_x>
 		<pos_y>-120</pos_y>
 		<width>1280</width>
 		<height>960</height>
 	<UnknownName>1</UnknownName>
-	<step_size>3</step_size>
-		<test_force>10</test_force>
+	<step_size>1</step_size>
+		<test_force>56</test_force>
+	<simplify>4.50077</simplify>
+		<curved_vertex>1</curved_vertex>
+		<flip_src>1</flip_src>
 	</player>
 </canon>

@@ -38,9 +38,9 @@ private:
 
 	float kinectAngle;
 	ofxFloatSlider nearThreshold, farThreshold;
-	ofxFloatSlider opacity;
+	ofxFloatSlider opacity, simplify;
 	ofxIntSlider stepSize;
-	ofxToggle flip;
+	ofxToggle flip, curved;
 	ofxFloatSlider posX, posY, width, height;
 
 	// --- forces
