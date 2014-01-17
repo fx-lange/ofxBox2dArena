@@ -18,7 +18,7 @@ void TargetCanon::setup(Arena * arena) {
 }
 
 void TargetCanon::setupGui() {
-	gui.setup("canon", "arena.xml", 600, 50);
+	gui.setup("canon", "arena.xml", 450, 60);
 	gui.add(density.setup("density", 3, 0, 5));
 	gui.add(bounce.setup("bounce", 0.53, 0, 2));
 	gui.add(friction.setup("friction", 0.9, 0, 5));

@@ -36,7 +36,7 @@ private:
 	ofxCvGrayscaleImage grayThreshNear;
 	ofxCvGrayscaleImage grayThreshFar;
 
-	float kinectAngle;
+	ofxFloatSlider kinectAngle;
 	ofxFloatSlider nearThreshold, farThreshold;
 	ofxFloatSlider opacity, simplify;
 	ofxIntSlider stepSize;

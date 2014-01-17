@@ -5,6 +5,7 @@
 #include "Arena.h"
 #include "TargetCanon.h"
 #include "Player.h"
+#include "Game.h"
 
 class arenaApp: public ofBaseApp {
 
@@ -25,4 +26,5 @@ public:
 	Box2dArena::Arena arena;
 	Box2dArena::TargetCanon canon;
 	Box2dArena::Player player;
+	Box2dArena::Game game;
 };

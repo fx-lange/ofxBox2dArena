@@ -29,7 +29,8 @@ void Player::setup(Arena * arena) {
 }
 
 void Player::setupGui() {
-	gui.setup("player", "arena.xml", 100, 50);
+	gui.setup("player", "arena.xml", 50, 60);
+	gui.add(kinectAngle.setup("kinect tilt", 0, -30, 30));
 	gui.add(nearThreshold.setup("kinect near", 0, 0, 255));
 	gui.add(farThreshold.setup("kinect far", 0, 0, 255));
 	gui.add(opacity.setup("opacity", 0, 0, 255));
@@ -162,7 +163,7 @@ void Player::drawDebug() {
 }
 
 void Player::changeKinectAngle(int diff) {
-	kinectAngle += diff;
+	kinectAngle = kinectAngle + diff;
 	kinect.setCameraTiltAngle(kinectAngle);
 }
 

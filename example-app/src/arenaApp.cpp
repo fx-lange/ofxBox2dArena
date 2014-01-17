@@ -18,6 +18,7 @@ void arenaApp::setup() {
 	arena.loadBackground("arena_wall.png");
 	canon.setup(&arena);
 	player.setup(&arena);
+	game.setup(&canon);
 }
 
 //--------------------------------------------------------------
@@ -27,6 +28,7 @@ void arenaApp::update() {
 		canon.shootNextTarget();
 	}
 
+	game.update();
 	arena.update();
 	player.update();
 }
@@ -59,6 +61,7 @@ void arenaApp::draw() {
 		arena.gui.draw();
 		canon.gui.draw();
 		player.gui.draw();
+		game.gui.draw();
 	}
 	if (bDrawDebug) {
 		string msg = "";
