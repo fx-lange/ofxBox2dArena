@@ -78,7 +78,8 @@ void Player::updateKinect() {
 
 		contourFinder.findContours(binaryImg, 10,
 				(kinect.width * kinect.height) / 2, 20, true, true);//TODO GUI
-		//TODO holes! learning opencv 237!
+		//TODO holes! learning opencv page 237! use different sorting and find way to draw poly with hole
+		//http://forum.openframeworks.cc/t/circles-with-holes-or-with-stroke/8173/3
 	}
 }
 
@@ -105,7 +106,6 @@ void Player::drawContour() {
 	ofPushStyle();
 	ofEnableAlphaBlending();
 	ofFill();
-	ofSetColor(0, 0, 0, opacity);
 
 	float cWidth = contourFinder.getWidth();
 	float cHeight = contourFinder.getHeight();
