@@ -10,12 +10,12 @@ void Target::loadImages() {
 	ofDirectory targetsDir;
 	targetsDir.open("targets");
 	targetsDir.listDir();
+	ofImage img;
 	for (int i = 0; i < (int) targetsDir.size(); ++i) {
 		ofDirectory dir;
 		dir.open(targetsDir.getPath(i));
 		dir.listDir();
 		dir.sort();
-		ofImage img;
 		img.loadImage(dir.getFile(0));
 		img.resize(img.width / 2, img.height / 2);
 		images.push_back(img);

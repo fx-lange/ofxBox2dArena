@@ -19,6 +19,9 @@ void Player::setup(Arena * arena) {
 	kinectAngle = 0;
 	kinect.setCameraTiltAngle(kinectAngle);
 
+	motion = new ofxCvMotionTemplates(kinect.width,kinect.height);
+	motion->setup();
+
 	colorImg.allocate(kinect.width, kinect.height);
 	binaryImg.allocate(kinect.width, kinect.height);
 	grayImg.allocate(kinect.width, kinect.height);
@@ -160,6 +163,11 @@ void Player::drawDebug() {
 	binaryImg.draw(0, 0);
 	ofPopMatrix();
 	ofPopStyle();
+}
+
+void Player::drawGui(){
+	gui.draw();
+	motion.gui.draw();
 }
 
 void Player::changeKinectAngle(int diff) {

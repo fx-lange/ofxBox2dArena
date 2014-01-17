@@ -1,6 +1,7 @@
 #include "ofxKinect.h"
 #include "ofxOpenCv.h"
 #include "ofxGui.h"
+#include "ofxCvMotionTemplates.h"
 #include "Arena.h"
 
 #pragma once
@@ -18,10 +19,10 @@ public:
 
 	void draw();
 	void drawDebug();
+	void drawGui();
 
 	void changeKinectAngle(int diff);
 
-	ofxPanel gui;
 private:
 	void updateKinect();
 	void updateForces();
@@ -36,6 +37,7 @@ private:
 	ofxCvGrayscaleImage grayThreshNear;
 	ofxCvGrayscaleImage grayThreshFar;
 
+	ofxPanel gui;
 	ofxFloatSlider kinectAngle;
 	ofxFloatSlider nearThreshold, farThreshold;
 	ofxFloatSlider opacity, simplify;
@@ -43,10 +45,12 @@ private:
 	ofxToggle bFlip, bDrawCurved;
 	ofxFloatSlider posX, posY, width, height;
 
-	// --- forces
-
+	// --- forces ---
 	Arena * arenaPtr;
 	ofxFloatSlider testForce;
+
+	// --- motion ---
+	ofxCvMotionTemplates * motion;
 };
 
 } /* namespace Box2dArena */
