@@ -79,7 +79,7 @@ void arenaApp::draw() {
 void arenaApp::keyPressed(int key) {
 	switch (key) {
 	case OF_KEY_RETURN:
-		game.pauseGame(false);
+		game.pauseGame(true);
 		break;
 	case 'q':
 		player.changeKinectAngle(1);
