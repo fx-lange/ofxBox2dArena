@@ -16,9 +16,9 @@ void Game::setup(TargetCanon * canon, string fontName) {
 
 	timeRemainingFont.loadFont(fontName, 30, true, true);
 
-	gameTime.setup(10*1000,false);
+	gameTime.setup(90 * 1000, false);
 	gameTime.pauseTimer();
-	ofAddListener(gameTime.TIMER_REACHED,this,&Game::gameDone);
+	ofAddListener(gameTime.TIMER_REACHED, this, &Game::gameDone);
 
 	setupGui();
 }
@@ -35,7 +35,7 @@ void Game::setupGui() {
 }
 
 void Game::update() {
-	if(bPause)
+	if (bPause)
 		return;
 
 	// ---- new targets -----
@@ -59,7 +59,7 @@ void Game::update() {
 	score.update(hitPointDuration, scoreDrifting);
 }
 
-void Game::gameDone(ofEventArgs & e){
+void Game::gameDone(ofEventArgs & e) {
 	int totalPoints = score.getTotal();
 	pauseGame(true);
 	cout << "TOTAL: " << totalPoints << endl;
@@ -77,10 +77,10 @@ void Game::draw() {
 	timeRemainingFont.drawString(timeStr, timeX, scoreY);
 }
 
-void Game::pauseGame(bool pause){
+void Game::pauseGame(bool pause) {
 	bPause = pause;
 	score.stopCounting(pause);
-	if(bPause == false){
+	if (bPause == false) {
 		gameTime.reset();
 		tLastUpdate = -1;
 	}

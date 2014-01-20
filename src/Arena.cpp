@@ -120,7 +120,7 @@ void Arena::addTarget(Target * target) {
 	targets.push_back(target);
 }
 
-list<Target*> & Arena::getTargets(){
+list<Target*> & Arena::getTargets() {
 	return targets;
 }
 

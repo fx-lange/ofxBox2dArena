@@ -33,8 +33,8 @@ public:
 
 	int getTotal();
 private:
-	bool bCount;
 	int total;
+	bool bCount;
 	ofTrueTypeFont font, hitFont;
 	list<HitPoint> hitPoints;
 };

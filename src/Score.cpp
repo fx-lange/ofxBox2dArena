@@ -42,26 +42,26 @@ void Score::draw(float x, float y) {
 }
 
 void Score::addHit(ofVec2f pos) {
-	if(!bCount)
+	if (!bCount)
 		return;
 	total += HIT;
 	hitPoints.push_back(HitPoint(pos, ofGetElapsedTimeMillis()));
 }
 
 void Score::addFail(ofVec2f pos) {
-	if(!bCount)
+	if (!bCount)
 		return;
 	total -= FAIL;
 	total = total < 0 ? 0 : total;
 }
 
-int Score::getTotal(){
+int Score::getTotal() {
 	return total;
 }
 
-void Score::stopCounting(bool stopCounting){
+void Score::stopCounting(bool stopCounting) {
 	bCount = !stopCounting;
-	if(bCount == true){
+	if (bCount == true) {
 		total = 0;
 	}
 }
