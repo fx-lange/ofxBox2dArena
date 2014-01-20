@@ -51,7 +51,7 @@ void Player::setupGui() {
 	contour.add(height.setup("height", 600, 0, 2000));
 	gui.add(&contour);
 	motionPanel.setup("motion");
-	motionPanel.add(testForce.setup("test force", 10, 0, 100));
+	motionPanel.add(testForce.setup("test force", 10, 0, 1000));
 	motionPanel.add(minDistance.setup("min distance",100,5,400));
 	gui.add(&motionPanel);
 	gui.loadFromFile("arena.xml");
@@ -119,20 +119,23 @@ void Player::updateForces() {
 	vector <ofxCvMotionBlob> & motions = motion->getLocalMotions();
 	for(int i=0;i < (int)motions.size(); i++){
 
-		float count = motions[i].count;
-		float area = motions[i].area;
 		ofPoint mp = motions[i].centroid;
 		mp.x += posX;
 		mp.y += posY;
 		mp.x *= width / kinect.width ;
 		mp.y *= height / kinect.height;
+		float area = motions[i].area;
+		float count = motions[i].count;
 		cout << "c: " << count << " a: " << area << " c/a: " << count/area << endl;
 
 		for (it = targets.begin(); it != targets.end(); ++it) {
-			float dis = mp.distance((*it)->getPosition());
+			Target * t = *it;
+			float dis = mp.distance(t->getPosition());
 			if (dis < minDistance) {
-				(*it)->addRepulsionForce(motions[i].centroid, testForce);
-				(*it)->bHit = true;
+				t->addRepulsionForce(mp, testForce);
+//				t->addForce(motions[i].forceDir.getNormalized(),testForce);
+//				t->addImpulseForce(motions[i].forceDir,ofVec2f(testForce,testForce));
+				t->bHit = true;
 			}
 		}
 	}

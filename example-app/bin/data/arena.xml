@@ -37,7 +37,7 @@
 			<height>969.388</height>
 		</contour>
 		<motion>
-			<test_force>100</test_force>
+			<test_force>811.224</test_force>
 		<min_distance>115.842</min_distance>
 		</motion>
 	</player>
@@ -58,7 +58,7 @@
 		<height>969.388</height>
 	</contour>
 <motion>
-		<test_force>100</test_force>
+		<test_force>811.224</test_force>
 		<min_distance>115.842</min_distance>
 	</motion>
 </canon>
