@@ -43,6 +43,8 @@
 	</player>
 <game>
 		<targets_per_sec>1.5</targets_per_sec>
+	<score_x>310</score_x>
+		<score_y>195</score_y>
 	</game>
 <contour>
 		<kinect_tilt>10.2653</kinect_tilt>

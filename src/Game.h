@@ -11,7 +11,7 @@ public:
 	Game();
 	virtual ~Game();
 
-	void setup(TargetCanon * canon);
+	void setup(TargetCanon * canon, string fontName);
 	void update();
 	void draw();
 
@@ -22,11 +22,11 @@ public:
 private:
 	void setupGui();
 
+	TargetCanon * canonPtr;
 	ofxFloatSlider targetsPerSec, scoreX, scoreY;
 	float targetsToShoot;
 	long tLastUpdate;
 
-	TargetCanon * canonPtr;
 	Score score;
 };
 

@@ -12,11 +12,14 @@ public:
 	Score();
 	virtual ~Score();
 
+	void setup(string font);
+
 	void draw();
 	void addHit(ofVec2f pos);
 	void addFail(ofVec2f pos);
 private:
 	int total;
+	ofTrueTypeFont font;
 };
 
 } /* namespace Box2dArena */

@@ -17,7 +17,7 @@ void arenaApp::setup() {
 	arena.setup();
 	arena.loadBackground("arena_wall.png");
 	canon.setup(&arena);
-	game.setup(&canon);
+	game.setup(&canon,"GovtAgentBB.ttf");
 	player.setup(&arena,game.getScore());
 }
 

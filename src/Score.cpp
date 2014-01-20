@@ -9,8 +9,12 @@ Score::Score() :
 Score::~Score() {
 }
 
+void Score::setup(string fontName){
+	font.loadFont(fontName,30,true,true,false);
+}
+
 void Score::draw(){
-	cout << total << endl;
+	font.drawString(ofToString(total),0,0);
 }
 
 void Score::addHit(ofVec2f pos){

@@ -16,16 +16,17 @@ Game::Game() :
 Game::~Game() {
 }
 
-void Game::setup(TargetCanon * canon) {
+void Game::setup(TargetCanon * canon, string fontName) {
 	canonPtr = canon;
+	score.setup(fontName);
 
 	setupGui();
 }
 
 void Game::setupGui() {
 	gui.setup("game", "arena.xml", 650, 60);
-	gui.add(scoreX.setup("score x",0,-500,500));
-	gui.add(scoreY.setup("score y",0,-500,500));
+	gui.add(scoreX.setup("score x", 0, -500, 500));
+	gui.add(scoreY.setup("score y", 0, -500, 500));
 	gui.add(targetsPerSec.setup("targets per sec", 1, 0, 15));
 	gui.loadFromFile("arena.xml");
 }
@@ -48,14 +49,14 @@ void Game::update() {
 	tLastUpdate = tNow;
 }
 
-void Game::draw(){
+void Game::draw() {
 	ofPushMatrix();
-	ofTranslate(scoreX,scoreY);
+	ofTranslate(scoreX, scoreY);
 	score.draw();
 	ofPopMatrix();
 }
 
-Score * Game::getScore(){
+Score * Game::getScore() {
 	return &score;
 }
 
