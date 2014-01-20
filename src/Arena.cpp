@@ -40,8 +40,6 @@ void Arena::updateTargets(Score * score) {
 	list<Target*>::iterator it = targets.begin();
 	for (; it != targets.end();) {
 		Target * target = *it;
-//		float x = target->body->GetPosition().x / OFX_BOX2D_SCALE;
-//		float y = target->body->GetPosition().y / OFX_BOX2D_SCALE;
 		float x = target->getPosition().x;
 		float y = target->getPosition().y;
 
@@ -54,8 +52,9 @@ void Arena::updateTargets(Score * score) {
 		} else {
 			if (target->bEnteredArena) {
 				//is leaving arena
-				if (!target->bHit) {
+				if (!target->bHit && !target->bMissed) {
 					target->color.set(255, 0, 0);
+					target->bMissed = true;
 					score->addFail(target->getPosition());
 				}
 			}

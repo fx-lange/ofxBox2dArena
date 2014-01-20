@@ -15,7 +15,7 @@ public:
 
 	virtual void draw(bool debug = false);
 
-	bool bHit, bEnteredArena;
+	bool bHit, bEnteredArena, bMissed;
 	ofColor color;
 protected:
 	ofImage *img, *brokenImg;

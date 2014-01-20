@@ -37,7 +37,7 @@ void Target::setup(b2World * b2dworld, float x, float y) {
 }
 
 Target::Target() :
-		bHit(false), bEnteredArena(false), img(NULL), brokenImg(NULL) {
+		bHit(false), bEnteredArena(false), bMissed(false), img(NULL), brokenImg(NULL) {
 	color.set(255, 255, 255);
 }
 
