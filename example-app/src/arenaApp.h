@@ -6,7 +6,6 @@
 #include "TargetCanon.h"
 #include "Player.h"
 #include "Game.h"
-#include "Score.h"
 
 class arenaApp: public ofBaseApp {
 
@@ -24,7 +23,6 @@ public:
 	void mouseReleased(int x, int y, int button);
 	void windowResized(int w, int h);
 
-	Box2dArena::Score score;
 	Box2dArena::Arena arena;
 	Box2dArena::TargetCanon canon;
 	Box2dArena::Player player;

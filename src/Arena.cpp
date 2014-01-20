@@ -1,4 +1,5 @@
 #include "Arena.h"
+#include "Score.h"
 
 namespace Box2dArena {
 
@@ -28,14 +29,14 @@ void Arena::setupGui() {
 	gui.loadFromFile("arena.xml");
 }
 
-void Arena::update() {
-	updateTargets();
+void Arena::update(Score * score) {
+	updateTargets(score);
 
 	box2d.setGravity(0, gravity); //TODO every frame?!
 	box2d.update();
 }
 
-void Arena::updateTargets() {
+void Arena::updateTargets(Score * score) {
 	list<Target*>::iterator it = targets.begin();
 	for (; it != targets.end();) {
 		Target * target = *it;
@@ -54,19 +55,15 @@ void Arena::updateTargets() {
 			if (target->bEnteredArena) {
 				//is leaving arena
 				if (!target->bHit) {
-					//TODO negative points
 					target->color.set(255, 0, 0);
-				} else {
-					//TODO ?
+					score->addFail(target->getPosition());
 				}
-
 			}
 
 			if (y > destroyLevel) {
 				it = targets.erase(it);
 				delete target;
 				continue;
-				//TODO check if everything gets deleted (breakpoint@destructors)
 			}
 		}
 		++it;

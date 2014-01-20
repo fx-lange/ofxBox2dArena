@@ -1,4 +1,5 @@
 #include "ofxGui.h"
+#include "Score.h"
 #include "TargetCanon.h"
 
 #pragma once
@@ -12,17 +13,21 @@ public:
 
 	void setup(TargetCanon * canon);
 	void update();
+	void draw();
+
+	Score * getScore();
 
 	ofxPanel gui;
 
 private:
 	void setupGui();
 
-	ofxFloatSlider targetsPerSec;
+	ofxFloatSlider targetsPerSec, scoreX, scoreY;
 	float targetsToShoot;
 	long tLastUpdate;
 
 	TargetCanon * canonPtr;
+	Score score;
 };
 
 } /* namespace Box2dArena */

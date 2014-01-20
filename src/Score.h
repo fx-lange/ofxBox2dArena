@@ -1,3 +1,5 @@
+#include "ofMain.h"
+
 #pragma once
 
 namespace Box2dArena {

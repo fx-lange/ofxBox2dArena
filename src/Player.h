@@ -8,12 +8,14 @@
 
 namespace Box2dArena {
 
+class Score;
+
 class Player {
 public:
 	Player();
 	virtual ~Player();
 
-	void setup(Arena * arena);
+	void setup(Arena * arena, Score * score);
 	void setupGui();
 	void update();
 
@@ -53,6 +55,9 @@ private:
 	ofxCvMotionTemplates * motion;
 	ofxCvGrayscaleImage motionImg;
 	ofImage silhouettesImg;
+
+	// --- game ---
+	Score * scorePtr;
 };
 
 } /* namespace Box2dArena */

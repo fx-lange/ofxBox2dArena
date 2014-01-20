@@ -9,6 +9,10 @@ Score::Score() :
 Score::~Score() {
 }
 
+void Score::draw(){
+	cout << total << endl;
+}
+
 void Score::addHit(ofVec2f pos){
 	total += HIT;
 }

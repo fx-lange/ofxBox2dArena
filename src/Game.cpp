@@ -24,6 +24,8 @@ void Game::setup(TargetCanon * canon) {
 
 void Game::setupGui() {
 	gui.setup("game", "arena.xml", 650, 60);
+	gui.add(scoreX.setup("score x",0,-500,500));
+	gui.add(scoreY.setup("score y",0,-500,500));
 	gui.add(targetsPerSec.setup("targets per sec", 1, 0, 15));
 	gui.loadFromFile("arena.xml");
 }
@@ -44,6 +46,17 @@ void Game::update() {
 	}
 
 	tLastUpdate = tNow;
+}
+
+void Game::draw(){
+	ofPushMatrix();
+	ofTranslate(scoreX,scoreY);
+	score.draw();
+	ofPopMatrix();
+}
+
+Score * Game::getScore(){
+	return &score;
 }
 
 } /* namespace Box2dArena */

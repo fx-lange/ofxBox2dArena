@@ -6,13 +6,15 @@
 
 namespace Box2dArena {
 
+class Score;
+
 class Arena {
 public:
 	Arena();
 	virtual ~Arena();
 
 	void setup();
-	void update();
+	void update(Score * score);
 	void draw();
 	void drawDebug();
 
@@ -30,7 +32,7 @@ private:
 	ofxBox2d box2d;
 	list<Target*> targets;
 
-	void updateTargets();
+	void updateTargets(Score * score);
 	bool isInside(float x, float y);
 
 	ofImage background;

@@ -1,16 +1,18 @@
 #include "Player.h"
+#include "Score.h"
 
 namespace Box2dArena {
 
 Player::Player() :
-		kinectAngle(0), arenaPtr(NULL), motion(NULL) {
+		kinectAngle(0), arenaPtr(NULL), motion(NULL), scorePtr(NULL) {
 }
 
 Player::~Player() {
 }
 
-void Player::setup(Arena * arena) {
+void Player::setup(Arena * arena, Score * score) {
 	arenaPtr = arena;
+	scorePtr = score;
 
 	kinect.setRegistration(true);
 	kinect.init();
@@ -28,8 +30,8 @@ void Player::setup(Arena * arena) {
 	grayImg.allocate(kinect.width, kinect.height);
 	grayThreshNear.allocate(kinect.width, kinect.height);
 	grayThreshFar.allocate(kinect.width, kinect.height);
-	motionImg.allocate(kinect.width,kinect.height);
-	silhouettesImg.allocate(kinect.width,kinect.height,OF_IMAGE_GRAYSCALE);
+	motionImg.allocate(kinect.width, kinect.height);
+	silhouettesImg.allocate(kinect.width, kinect.height, OF_IMAGE_GRAYSCALE);
 
 	setupGui();
 }
@@ -52,7 +54,7 @@ void Player::setupGui() {
 	gui.add(&contour);
 	motionPanel.setup("motion");
 	motionPanel.add(testForce.setup("test force", 10, 0, 1000));
-	motionPanel.add(minDistance.setup("min distance",100,5,400));
+	motionPanel.add(minDistance.setup("min distance", 100, 5, 400));
 	gui.add(&motionPanel);
 	gui.loadFromFile("arena.xml");
 }
@@ -97,13 +99,13 @@ void Player::updateKinect() {
 
 void Player::updateForces() {
 	motionImg = motion->calculateMotions(binaryImg);
-	silhouettesImg.setFromPixels(motionImg.getPixels(),kinect.width,kinect.height,OF_IMAGE_GRAYSCALE);
+	silhouettesImg.setFromPixels(motionImg.getPixels(), kinect.width,
+			kinect.height, OF_IMAGE_GRAYSCALE);
 	silhouettesImg.setImageType(OF_IMAGE_COLOR_ALPHA);
 	motion->setBlackToTransparent(silhouettesImg);
 
 	list<Target*> & targets = arenaPtr->getTargets();
 	list<Target*>::iterator it = targets.begin();
-
 
 	if (ofGetMousePressed()) {
 		ofVec2f mouse(ofGetMouseX(), ofGetMouseY());
@@ -116,29 +118,34 @@ void Player::updateForces() {
 		}
 	}
 
-	vector <ofxCvMotionBlob> & motions = motion->getLocalMotions();
-	for(int i=0;i < (int)motions.size(); i++){
+	vector<ofxCvMotionBlob> & motions = motion->getLocalMotions();
+	for (int i = 0; i < (int) motions.size(); i++) {
 
 		ofPoint mp = motions[i].centroid;
-		mp.x *= width / kinect.width ;
+		mp.x *= width / kinect.width;
 		mp.y *= height / kinect.height;
 		mp.x += posX;
 		mp.y += posY;
 		float area = motions[i].area;
 		float count = motions[i].count;
-		cout << "c: " << count << " a: " << area << " c/a: " << count/area << endl;
+		cout << "c: " << count << " a: " << area << " c/a: " << count / area
+				<< endl;
 
 		for (it = targets.begin(); it != targets.end(); ++it) {
 			Target * t = *it;
 			ofVec2f tPos = t->getPosition();
-			if(abs(tPos.x - mp.x) < motions[i].boundingRect.width + minDistance &&
-					abs(tPos.y - mp.y) < motions[i].boundingRect.height + minDistance){
+			if (abs(tPos.x - mp.x) < motions[i].boundingRect.width + minDistance
+					&& abs(tPos.y - mp.y)
+							< motions[i].boundingRect.height + minDistance) {
 //			float dis = mp.distance(tPos);
 //			if (dis < minDistance) {
 				t->addRepulsionForce(mp, testForce);
 //				t->addForce(motions[i].forceDir.getNormalized(),testForce);
 //				t->addImpulseForce(motions[i].forceDir,ofVec2f(testForce,testForce));
-				t->bHit = true;
+				if(!t->bHit){
+					t->bHit = true;
+					scorePtr->addHit(t->getPosition());
+				}
 			}
 		}
 	}
@@ -190,15 +197,15 @@ void Player::drawContour(bool debug) {
 		ofEndShape(false);
 	}
 
-	ofSetColor(150,130,20,70);
+	ofSetColor(150, 130, 20, 70);
 	ofSetRectMode(OF_RECTMODE_CORNER);
-	silhouettesImg.draw(0,0);
+	silhouettesImg.draw(0, 0);
 
-	if(debug){
-		ofSetColor(255,255,255);
-		vector <ofxCvMotionBlob> & motions = motion->getLocalMotions();
-		for(int i=0;i < (int)motions.size(); i++){
-			motions[i].draw(0,0);
+	if (debug) {
+		ofSetColor(255, 255, 255);
+		vector<ofxCvMotionBlob> & motions = motion->getLocalMotions();
+		for (int i = 0; i < (int) motions.size(); i++) {
+			motions[i].draw(0, 0);
 		}
 	}
 	ofPopMatrix();
@@ -215,7 +222,7 @@ void Player::drawDebug() {
 	ofPushStyle();
 	ofTranslate(ofGetWidth() / 2.f, ofGetHeight() / 2.f);
 	binaryImg.draw(0, 0);
-	motionImg.draw(0,0);
+	motionImg.draw(0, 0);
 	ofPopMatrix();
 	ofPopStyle();
 }

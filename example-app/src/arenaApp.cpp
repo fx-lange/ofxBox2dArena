@@ -17,8 +17,8 @@ void arenaApp::setup() {
 	arena.setup();
 	arena.loadBackground("arena_wall.png");
 	canon.setup(&arena);
-	player.setup(&arena);
 	game.setup(&canon);
+	player.setup(&arena,game.getScore());
 }
 
 //--------------------------------------------------------------
@@ -29,7 +29,7 @@ void arenaApp::update() {
 	}
 
 	game.update();
-	arena.update();
+	arena.update(game.getScore());
 	player.update();
 }
 
@@ -45,6 +45,7 @@ void arenaApp::draw() {
 
 	arena.draw();
 	player.draw();
+	game.draw();
 
 	if (bDrawDebug) {
 		arena.drawDebug();
