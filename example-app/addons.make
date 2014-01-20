@@ -4,3 +4,4 @@ ofxBox2dArena
 ofxKinect
 ofxOpenCv
 ofxCvMotionTemplates
+ofxTimer
