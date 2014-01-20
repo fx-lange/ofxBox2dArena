@@ -1,6 +1,7 @@
 #include "ofxGui.h"
 #include "Score.h"
 #include "TargetCanon.h"
+#include "ofxTimer.h"
 
 #pragma once
 
@@ -14,6 +15,9 @@ public:
 	void setup(TargetCanon * canon, string fontName);
 	void update();
 	void draw();
+
+	void gameDone(ofEventArgs & e);
+	void pauseGame(bool pause);
 
 	Score * getScore();
 
@@ -32,7 +36,8 @@ private:
 	long tLastUpdate;
 
 	ofTrueTypeFont timeRemainingFont;
-	int timeRemaingSec;
+	ofxTimer gameTime;
+	bool bPause;
 };
 
 } /* namespace Box2dArena */
