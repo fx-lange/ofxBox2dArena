@@ -28,6 +28,8 @@ void Player::setup(Arena * arena) {
 	grayImg.allocate(kinect.width, kinect.height);
 	grayThreshNear.allocate(kinect.width, kinect.height);
 	grayThreshFar.allocate(kinect.width, kinect.height);
+	motionImg.allocate(kinect.width,kinect.height);
+	silhouettesImg.allocate(kinect.width,kinect.height,OF_IMAGE_GRAYSCALE);
 
 	setupGui();
 }
@@ -50,6 +52,7 @@ void Player::setupGui() {
 	gui.add(&contour);
 	motionPanel.setup("motion");
 	motionPanel.add(testForce.setup("test force", 10, 0, 100));
+	motionPanel.add(minDistance.setup("min distance",100,5,400));
 	gui.add(&motionPanel);
 	gui.loadFromFile("arena.xml");
 }
@@ -93,7 +96,10 @@ void Player::updateKinect() {
 }
 
 void Player::updateForces() {
-	motion->calculateMotions(binaryImg);
+	motionImg = motion->calculateMotions(binaryImg);
+	silhouettesImg.setFromPixels(motionImg.getPixels(),kinect.width,kinect.height,OF_IMAGE_GRAYSCALE);
+	silhouettesImg.setImageType(OF_IMAGE_COLOR_ALPHA);
+	motion->setBlackToTransparent(silhouettesImg);
 
 	list<Target*> & targets = arenaPtr->getTargets();
 	list<Target*>::iterator it = targets.begin();
@@ -103,7 +109,7 @@ void Player::updateForces() {
 		ofVec2f mouse(ofGetMouseX(), ofGetMouseY());
 		for (; it != targets.end(); ++it) {
 			float dis = mouse.distance((*it)->getPosition());
-			if (dis < 200) {
+			if (dis < minDistance) {
 				(*it)->addRepulsionForce(mouse, testForce);
 				(*it)->bHit = true;
 			}
@@ -112,9 +118,19 @@ void Player::updateForces() {
 
 	vector <ofxCvMotionBlob> & motions = motion->getLocalMotions();
 	for(int i=0;i < (int)motions.size(); i++){
+
+		float count = motions[i].count;
+		float area = motions[i].area;
+		ofPoint mp = motions[i].centroid;
+		mp.x += posX;
+		mp.y += posY;
+		mp.x *= width / kinect.width ;
+		mp.y *= height / kinect.height;
+		cout << "c: " << count << " a: " << area << " c/a: " << count/area << endl;
+
 		for (it = targets.begin(); it != targets.end(); ++it) {
-			float dis = motions[i].centroid.distance((*it)->getPosition());
-			if (dis < 200) {
+			float dis = mp.distance((*it)->getPosition());
+			if (dis < minDistance) {
 				(*it)->addRepulsionForce(motions[i].centroid, testForce);
 				(*it)->bHit = true;
 			}
@@ -167,6 +183,16 @@ void Player::drawContour() {
 		}
 		ofEndShape(false);
 	}
+
+	ofSetColor(150,130,20,70);
+	ofSetRectMode(OF_RECTMODE_CORNER);
+	silhouettesImg.draw(0,0);
+
+	ofSetColor(255,255,255);
+	vector <ofxCvMotionBlob> & motions = motion->getLocalMotions();
+	for(int i=0;i < (int)motions.size(); i++){
+		motions[i].draw(0,0);
+	}
 	ofPopMatrix();
 
 	ofPopStyle();
@@ -181,6 +207,7 @@ void Player::drawDebug() {
 	ofPushStyle();
 	ofTranslate(ofGetWidth() / 2.f, ofGetHeight() / 2.f);
 	binaryImg.draw(0, 0);
+	motionImg.draw(0,0);
 	ofPopMatrix();
 	ofPopStyle();
 }

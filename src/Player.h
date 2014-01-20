@@ -47,10 +47,12 @@ private:
 
 	// --- forces ---
 	Arena * arenaPtr;
-	ofxFloatSlider testForce;
+	ofxFloatSlider testForce, minDistance;
 
 	// --- motion ---
 	ofxCvMotionTemplates * motion;
+	ofxCvGrayscaleImage motionImg;
+	ofImage silhouettesImg;
 };
 
 } /* namespace Box2dArena */

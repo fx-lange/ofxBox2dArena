@@ -37,7 +37,8 @@
 			<height>969.388</height>
 		</contour>
 		<motion>
-			<test_force>55.6122</test_force>
+			<test_force>100</test_force>
+		<min_distance>115.842</min_distance>
 		</motion>
 	</player>
 <game>
@@ -45,8 +46,8 @@
 	</game>
 <contour>
 		<kinect_tilt>10.2653</kinect_tilt>
-		<kinect_near>147.015</kinect_near>
-		<kinect_far>117.092</kinect_far>
+		<kinect_near>243.291</kinect_near>
+		<kinect_far>75.4592</kinect_far>
 		<opacity>165.23</opacity>
 		<step_size>1</step_size>
 		<simplify>3.98039</simplify>
@@ -56,4 +57,8 @@
 		<width>1285.71</width>
 		<height>969.388</height>
 	</contour>
+<motion>
+		<test_force>100</test_force>
+		<min_distance>115.842</min_distance>
+	</motion>
 </canon>
