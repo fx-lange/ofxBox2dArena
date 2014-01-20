@@ -24,14 +24,14 @@
 <player>
 		<flip_src>1</flip_src>
 	<contour>
-			<kinect_tilt>10.2653</kinect_tilt>
+			<kinect_tilt>14.2653</kinect_tilt>
 			<kinect_near>243.291</kinect_near>
-			<kinect_far>75.4592</kinect_far>
-			<opacity>165.23</opacity>
+			<kinect_far>114.49</kinect_far>
+			<opacity>96.2755</opacity>
 			<step_size>1</step_size>
 			<simplify>3.98039</simplify>
 			<curved_vertex>0</curved_vertex>
-			<pos_x>-51.0204</pos_x>
+			<pos_x>91.8367</pos_x>
 			<pos_y>-122.449</pos_y>
 			<width>1285.71</width>
 			<height>969.388</height>
@@ -42,22 +42,22 @@
 		</motion>
 	</player>
 <game>
-		<targets_per_sec>1.5</targets_per_sec>
+		<targets_per_sec>5.775</targets_per_sec>
 	<score_x>310</score_x>
 		<score_y>195</score_y>
 	<time_x>1212.5</time_x>
-		<hp_duration>2</hp_duration>
-	<score_drifting>0.31</score_drifting>
+		<hp_duration>1.58</hp_duration>
+	<score_drifting>0.83</score_drifting>
 	</game>
 <contour>
-		<kinect_tilt>10.2653</kinect_tilt>
+		<kinect_tilt>14.2653</kinect_tilt>
 		<kinect_near>243.291</kinect_near>
-		<kinect_far>75.4592</kinect_far>
-		<opacity>165.23</opacity>
+		<kinect_far>114.49</kinect_far>
+		<opacity>96.2755</opacity>
 		<step_size>1</step_size>
 		<simplify>3.98039</simplify>
 		<curved_vertex>0</curved_vertex>
-		<pos_x>-51.0204</pos_x>
+		<pos_x>91.8367</pos_x>
 		<pos_y>-122.449</pos_y>
 		<width>1285.71</width>
 		<height>969.388</height>

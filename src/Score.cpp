@@ -11,7 +11,7 @@ Score::~Score() {
 
 void Score::setup(string fontName) {
 	font.loadFont(fontName, 30, true, true, false);
-	hitFont.loadFont(fontName, 40, true, true, false);
+	hitFont.loadFont(fontName, 55, true, true, false);
 }
 
 void Score::update(float hpDuration, float drifting) {
@@ -33,10 +33,10 @@ void Score::draw(float x, float y) {
 	font.drawString(ofToString(total), x, y);
 	list<HitPoint>::iterator it = hitPoints.begin();
 	for (; it != hitPoints.end(); it++) {
-		ofSetColor(255, 50, 0);
+		ofSetColor(220, 27, 42);
 		hitFont.drawString(ofToString(HIT), (*it).pos.x, (*it).pos.y);
-		ofSetColor(200, 200, 0);
-		hitFont.drawString(ofToString(HIT), (*it).pos.x - 1, (*it).pos.y - 1);
+		ofSetColor(245, 191, 42);
+		hitFont.drawString(ofToString(HIT), (*it).pos.x - 5, (*it).pos.y - 4);
 	}
 	ofPopStyle();
 }
