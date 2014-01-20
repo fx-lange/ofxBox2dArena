@@ -144,11 +144,11 @@ void Player::updateForces() {
 	}
 }
 
-void Player::draw() {
-	drawContour();
+void Player::draw(bool debug) {
+	drawContour(debug);
 }
 
-void Player::drawContour() {
+void Player::drawContour(bool debug) {
 	ofPushStyle();
 	ofEnableAlphaBlending();
 	ofFill();
@@ -194,10 +194,12 @@ void Player::drawContour() {
 	ofSetRectMode(OF_RECTMODE_CORNER);
 	silhouettesImg.draw(0,0);
 
-	ofSetColor(255,255,255);
-	vector <ofxCvMotionBlob> & motions = motion->getLocalMotions();
-	for(int i=0;i < (int)motions.size(); i++){
-		motions[i].draw(0,0);
+	if(debug){
+		ofSetColor(255,255,255);
+		vector <ofxCvMotionBlob> & motions = motion->getLocalMotions();
+		for(int i=0;i < (int)motions.size(); i++){
+			motions[i].draw(0,0);
+		}
 	}
 	ofPopMatrix();
 

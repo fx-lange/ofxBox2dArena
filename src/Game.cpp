@@ -31,15 +31,15 @@ void Game::setupGui() {
 void Game::update() {
 	long tNow = ofGetElapsedTimeMillis();
 
-	if(tLastUpdate < 0){
+	if (tLastUpdate < 0) {
 		tLastUpdate = tNow;
 	}
 
-	targetsToShoot += (tNow - tLastUpdate)/1000.f * targetsPerSec;
+	targetsToShoot += (tNow - tLastUpdate) / 1000.f * targetsPerSec;
 
 	int shots = floor(targetsToShoot);
-	targetsToShoot -= (float)shots;
-	for(int i=0;i<shots;++i){
+	targetsToShoot -= (float) shots;
+	for (int i = 0; i < shots; ++i) {
 		canonPtr->shootNextTarget();
 	}
 

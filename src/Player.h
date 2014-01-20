@@ -17,7 +17,7 @@ public:
 	void setupGui();
 	void update();
 
-	void draw();
+	void draw(bool debug = false);
 	void drawDebug();
 	void drawGui();
 
@@ -26,7 +26,7 @@ public:
 private:
 	void updateKinect();
 	void updateForces();
-	void drawContour();
+	void drawContour(bool debug);
 
 	// --- kinect visualization
 	ofxKinect kinect;
