@@ -27,11 +27,13 @@ void Game::setupGui() {
 	gui.setup("game", "arena.xml", 650, 60);
 	gui.add(scoreX.setup("score x", 0, -500, 500));
 	gui.add(scoreY.setup("score y", 0, -500, 500));
+	gui.add(hitPointDuration.setup("hp duration",1,0,4));
 	gui.add(targetsPerSec.setup("targets per sec", 1, 0, 15));
 	gui.loadFromFile("arena.xml");
 }
 
 void Game::update() {
+	// ---- new targets -----
 	long tNow = ofGetElapsedTimeMillis();
 
 	if (tLastUpdate < 0) {
@@ -47,12 +49,14 @@ void Game::update() {
 	}
 
 	tLastUpdate = tNow;
+
+	// ---- score ----
+	score.update(hitPointDuration);
 }
 
 void Game::draw() {
 	ofPushMatrix();
-	ofTranslate(scoreX, scoreY);
-	score.draw();
+	score.draw(scoreX,scoreY);
 	ofPopMatrix();
 }
 

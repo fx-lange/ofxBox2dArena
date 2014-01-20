@@ -4,8 +4,18 @@
 
 namespace Box2dArena {
 
-#define HIT 5
-#define FAIL 15
+#define HIT 50
+#define FAIL 100
+
+struct HitPoint{
+	ofVec2f pos;
+	long timestamp;
+
+	HitPoint(ofVec2f pos, long timestamp){
+		this->pos = pos;
+		this->timestamp = timestamp;
+	}
+};
 
 class Score {
 public:
@@ -13,13 +23,15 @@ public:
 	virtual ~Score();
 
 	void setup(string font);
+	void update(float hpDuration);
 
-	void draw();
+	void draw(float x, float y);
 	void addHit(ofVec2f pos);
 	void addFail(ofVec2f pos);
 private:
 	int total;
-	ofTrueTypeFont font;
+	ofTrueTypeFont font, hitFont;
+	list<HitPoint> hitPoints;
 };
 
 } /* namespace Box2dArena */

@@ -22,12 +22,13 @@ public:
 private:
 	void setupGui();
 
+	Score score;
 	TargetCanon * canonPtr;
-	ofxFloatSlider targetsPerSec, scoreX, scoreY;
+
+	ofxFloatSlider targetsPerSec, scoreX, scoreY, hitPointDuration;
+
 	float targetsToShoot;
 	long tLastUpdate;
-
-	Score score;
 };
 
 } /* namespace Box2dArena */
