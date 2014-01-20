@@ -38,7 +38,7 @@
 		</contour>
 		<motion>
 			<test_force>811.224</test_force>
-		<min_distance>115.842</min_distance>
+		<min_distance>5</min_distance>
 		</motion>
 	</player>
 <game>
@@ -59,6 +59,6 @@
 	</contour>
 <motion>
 		<test_force>811.224</test_force>
-		<min_distance>115.842</min_distance>
+		<min_distance>17.0918</min_distance>
 	</motion>
 </canon>

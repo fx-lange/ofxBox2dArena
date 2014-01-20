@@ -120,18 +120,21 @@ void Player::updateForces() {
 	for(int i=0;i < (int)motions.size(); i++){
 
 		ofPoint mp = motions[i].centroid;
-		mp.x += posX;
-		mp.y += posY;
 		mp.x *= width / kinect.width ;
 		mp.y *= height / kinect.height;
+		mp.x += posX;
+		mp.y += posY;
 		float area = motions[i].area;
 		float count = motions[i].count;
 		cout << "c: " << count << " a: " << area << " c/a: " << count/area << endl;
 
 		for (it = targets.begin(); it != targets.end(); ++it) {
 			Target * t = *it;
-			float dis = mp.distance(t->getPosition());
-			if (dis < minDistance) {
+			ofVec2f tPos = t->getPosition();
+			if(abs(tPos.x - mp.x) < motions[i].boundingRect.width + minDistance &&
+					abs(tPos.y - mp.y) < motions[i].boundingRect.height + minDistance){
+//			float dis = mp.distance(tPos);
+//			if (dis < minDistance) {
 				t->addRepulsionForce(mp, testForce);
 //				t->addForce(motions[i].forceDir.getNormalized(),testForce);
 //				t->addImpulseForce(motions[i].forceDir,ofVec2f(testForce,testForce));
