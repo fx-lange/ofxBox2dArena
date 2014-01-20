@@ -25,10 +25,13 @@ private:
 	Score score;
 	TargetCanon * canonPtr;
 
-	ofxFloatSlider targetsPerSec, scoreX, scoreY, hitPointDuration;
+	ofxFloatSlider targetsPerSec, scoreX, scoreY, hitPointDuration, timeX;
 
 	float targetsToShoot;
 	long tLastUpdate;
+
+	ofTrueTypeFont timeRemainingFont;
+	int timeRemaingSec;
 };
 
 } /* namespace Box2dArena */

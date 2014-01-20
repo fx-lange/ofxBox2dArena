@@ -45,6 +45,8 @@
 		<targets_per_sec>1.5</targets_per_sec>
 	<score_x>310</score_x>
 		<score_y>195</score_y>
+	<time_x>1212.5</time_x>
+		<hp_duration>1</hp_duration>
 	</game>
 <contour>
 		<kinect_tilt>10.2653</kinect_tilt>

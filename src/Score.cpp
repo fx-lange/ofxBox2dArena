@@ -28,6 +28,7 @@ void Score::update(float hpDuration){
 }
 
 void Score::draw(float x, float y){
+	ofPushStyle();
 	font.drawString(ofToString(total),x,y);
 	list<HitPoint>::iterator it = hitPoints.begin();
 	for(;it!=hitPoints.end();it++){
@@ -36,6 +37,7 @@ void Score::draw(float x, float y){
 		ofSetColor(200,200,0);
 		hitFont.drawString(ofToString(HIT),(*it).pos.x-1,(*it).pos.y-1);
 	}
+	ofPopStyle();
 }
 
 void Score::addHit(ofVec2f pos){
