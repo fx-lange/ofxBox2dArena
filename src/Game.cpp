@@ -1,10 +1,3 @@
-/*
- * Game.cpp
- *
- *  Created on: Jan 17, 2014
- *      Author: felix
- */
-
 #include "Game.h"
 
 namespace Box2dArena {
@@ -31,6 +24,7 @@ void Game::setupGui() {
 	gui.add(scoreY.setup("score y", 0, -500, 500));
 	gui.add(timeX.setup("time x", 1000, -500, 2000));
 	gui.add(hitPointDuration.setup("hp duration",1,0,4));
+	gui.add(scoreDrifting.setup("score drifting", 0, 0, 0.5));
 	gui.add(targetsPerSec.setup("targets per sec", 1, 0, 15));
 	gui.loadFromFile("arena.xml");
 }
@@ -54,7 +48,7 @@ void Game::update() {
 	tLastUpdate = tNow;
 
 	// ---- score ----
-	score.update(hitPointDuration);
+	score.update(hitPointDuration,scoreDrifting);
 }
 
 void Game::draw() {

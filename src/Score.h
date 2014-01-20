@@ -23,7 +23,7 @@ public:
 	virtual ~Score();
 
 	void setup(string font);
-	void update(float hpDuration);
+	void update(float hpDuration, float drifting = 0);
 
 	void draw(float x, float y);
 	void addHit(ofVec2f pos);

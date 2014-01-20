@@ -25,7 +25,8 @@ private:
 	Score score;
 	TargetCanon * canonPtr;
 
-	ofxFloatSlider targetsPerSec, scoreX, scoreY, hitPointDuration, timeX;
+	ofxFloatSlider targetsPerSec, scoreX, scoreY, timeX;
+	ofxFloatSlider hitPointDuration, scoreDrifting;
 
 	float targetsToShoot;
 	long tLastUpdate;

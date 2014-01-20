@@ -14,7 +14,7 @@ void Score::setup(string fontName){
 	hitFont.loadFont(fontName,40,true,true,false);
 }
 
-void Score::update(float hpDuration){
+void Score::update(float hpDuration, float drifting){
 	long tNow = ofGetElapsedTimeMillis();
 	list<HitPoint>::iterator it = hitPoints.begin();
 	while(it!=hitPoints.end()){
@@ -22,6 +22,7 @@ void Score::update(float hpDuration){
 		if(tNow - hp.timestamp  > hpDuration * 1000.f){
 			it = hitPoints.erase(it);
 		}else{
+			it->pos.y -= drifting;
 			++it;
 		}
 	}

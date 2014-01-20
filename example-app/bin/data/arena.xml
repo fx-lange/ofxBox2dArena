@@ -46,7 +46,8 @@
 	<score_x>310</score_x>
 		<score_y>195</score_y>
 	<time_x>1212.5</time_x>
-		<hp_duration>1</hp_duration>
+		<hp_duration>2</hp_duration>
+	<score_drifting>0.31</score_drifting>
 	</game>
 <contour>
 		<kinect_tilt>10.2653</kinect_tilt>
