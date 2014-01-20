@@ -19,8 +19,8 @@ void Arena::setup() {
 
 void Arena::setupGui() {
 	gui.setup("arena", "arena.xml", 250, 60);
-	gui.add(width.setup("arena width", 800, 1024, 1600));
-	gui.add(height.setup("arena height", 600, 756, 900));
+	gui.add(width.setup("arena width", 800, 800, 1600));
+	gui.add(height.setup("arena height", 600, 600, 900));
 	gui.add(destroyLevel.setup("destroy level", 1000, 500, 2000));
 	gui.add(gravity.setup("gravity", 1, 0, 5));
 	gui.add(offsetX.setup("bg offset X", 0, -500, 500));
