@@ -2,6 +2,7 @@
 
 bool bDrawGui = true;
 bool bDrawDebug = true;
+bool bDrawWinnerPictureDebug = false;
 
 bool eNextTarget = true;
 
@@ -18,7 +19,7 @@ void arenaApp::setup() {
 	arena.setup();
 	arena.loadBackground("arena_wall.png");
 	canon.setup(&arena);
-	game.setup(&canon,"GovtAgentBB.ttf");
+	game.setup(&canon,&player,"GovtAgentBB.ttf");
 	player.setup(&arena,game.getScore());
 }
 
@@ -52,6 +53,10 @@ void arenaApp::draw() {
 		arena.drawDebug();
 		canon.drawDebug(modeToShow);
 		player.drawDebug();
+	}
+
+	if(bDrawWinnerPictureDebug){
+		game.drawPicture(true);
 	}
 
 	ofPopMatrix();
@@ -90,6 +95,9 @@ void arenaApp::keyPressed(int key) {
 		break;
 	case 'd':
 		bDrawDebug = !bDrawDebug;
+		break;
+	case 'w':
+		bDrawWinnerPictureDebug = !bDrawWinnerPictureDebug;
 		break;
 	case 'g':
 		bDrawGui = !bDrawGui;

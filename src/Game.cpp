@@ -1,10 +1,11 @@
 #include "Game.h"
+#include "Player.h"
 
 namespace Box2dArena {
 
 Game::Game() :
-		canonPtr(NULL), targetsToShoot(0), tLastUpdate(-1), bPause(true), totalTime(
-				45), mode(0), gamemode(GAME), playerPtr(NULL) {
+		canonPtr(NULL), playerPtr(NULL), targetsToShoot(0), tLastUpdate(-1), bPause(
+				true), totalTime(45), mode(0), gamemode(GAME) {
 }
 
 Game::~Game() {
@@ -38,12 +39,12 @@ void Game::setupGui() {
 	gui.add(targetsPerSec2.setup("targets per sec 2", 1, 0, 15));
 	gui.add(targetsPerSec3.setup("targets per sec 3", 1, 0, 15));
 	highscorePanel.setup("highscore");
-	highscorePanel.add(templateX.setup("template X", 0, -500, 500));
-	highscorePanel.add(templateY.setup("template Y", 0, -500, 500));
+	highscorePanel.add(templateX.setup("template X", 0, 0, 1500));
+	highscorePanel.add(templateY.setup("template Y", 0, 0, 1500));
 	highscorePanel.add(templateScale.setup("template scale", 1, 0, 2));
 	highscorePanel.add(templateOpacity.setup("template opacity", 100, 0, 255));
-	highscorePanel.add(winnerImgX.setup("winnerImg X", 0, -500, 500));
-	highscorePanel.add(winnerImgY.setup("winnerImg Y", 0, -500, 500));
+	highscorePanel.add(winnerImgX.setup("winnerImg X", 0, 0, 1500));
+	highscorePanel.add(winnerImgY.setup("winnerImg Y", 0, 0, 1500));
 	highscorePanel.add(winnerImgScale.setup("winnerImg scale", 1, 0, 2));
 	highscorePanel.add(frameX.setup("frame X", 0, -500, 500));
 	highscorePanel.add(frameY.setup("frame Y", 0, -500, 500));
@@ -99,8 +100,8 @@ void Game::gameDone(ofEventArgs & e) {
 }
 
 void Game::draw() {
-	switch (gamemode) {
-	case GAME:
+	switch ((int) gamemode) {
+	case GAME: {
 		score.draw(scoreX, scoreY);
 
 		int timeRemaingSec = gameTime.getTimeLeftInSeconds();
@@ -111,10 +112,9 @@ void Game::draw() {
 				+ ofToString(sec, 0, 2, '0');
 		timeRemainingFont.drawString(timeStr, timeX, scoreY);
 		break;
-	case PICTURE: {
-		drawPicture();
-		break;
 	}
+	case PICTURE:
+		drawPicture();
 		break;
 	case HIGHSCORE:
 		break;
@@ -124,6 +124,8 @@ void Game::draw() {
 void Game::drawPicture(bool debug) {
 	ofxCvColorImage & colorImg = playerPtr->getColorImg();
 
+	ofPushStyle();
+	ofSetRectMode(OF_RECTMODE_CORNER);
 	ofSetColor(255);
 	ofPushMatrix();
 	ofTranslate(winnerImgX, winnerImgY);
@@ -131,17 +133,21 @@ void Game::drawPicture(bool debug) {
 	colorImg.draw(0, 0);
 	ofPopMatrix();
 
+	ofSetColor(255, 255, 255, templateOpacity);
 	ofPushMatrix();
 	ofTranslate(templateX, templateY);
 	ofScale(templateScale, templateScale);
 	templateImg.draw(0, 0);
 	ofPopMatrix();
 
-	ofSetColor(255, 0, 0, 0);
-	ofPushMatrix();
-	ofTranslate(winnerImgX, winnerImgY);
-	ofRect(frameX, frameY, frameW, frameH);
-	ofPopMatrix();
+	if (debug) {
+		ofSetColor(255, 0, 0);
+		ofPushMatrix();
+		ofTranslate(winnerImgX, winnerImgY);
+		ofRect(frameX, frameY, frameW, frameH);
+		ofPopMatrix();
+	}
+	ofPopStyle();
 }
 
 void Game::pauseGame(bool pause) {

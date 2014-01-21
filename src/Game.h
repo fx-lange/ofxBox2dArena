@@ -7,6 +7,8 @@
 
 namespace Box2dArena {
 
+class Player;
+
 enum GameMode{
 	GAME,
 	PICTURE,

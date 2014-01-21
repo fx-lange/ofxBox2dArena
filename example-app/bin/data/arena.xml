@@ -48,6 +48,21 @@
 	<time_x>887.5</time_x>
 		<hp_duration>1.58</hp_duration>
 	<score_drifting>0.83</score_drifting>
+	<targets_per_sec_2>1</targets_per_sec_2>
+		<targets_per_sec_3>1</targets_per_sec_3>
+		<highscore>
+			<template_X>359.694</template_X>
+			<template_Y>99.4898</template_Y>
+			<template_scale>0.632653</template_scale>
+			<template_opacity>153.52</template_opacity>
+			<winnerImg_X>382.653</winnerImg_X>
+			<winnerImg_Y>122.449</winnerImg_Y>
+			<winnerImg_scale>1.32653</winnerImg_scale>
+			<frame_X>260.204</frame_X>
+			<frame_Y>147.959</frame_Y>
+			<frame_W>438.776</frame_W>
+			<frame_H>285.714</frame_H>
+		</highscore>
 	</game>
 <contour>
 		<kinect_tilt>4.2653</kinect_tilt>
@@ -94,4 +109,17 @@
 		<random_min>50</random_min>
 		<random_max>50</random_max>
 	</canon2>
+<highscore>
+		<template_X>359.694</template_X>
+		<template_Y>99.4898</template_Y>
+		<template_scale>0.632653</template_scale>
+		<template_opacity>153.52</template_opacity>
+		<winnerImg_X>382.653</winnerImg_X>
+		<winnerImg_Y>122.449</winnerImg_Y>
+		<winnerImg_scale>1.32653</winnerImg_scale>
+		<frame_X>260.204</frame_X>
+		<frame_Y>147.959</frame_Y>
+		<frame_W>438.776</frame_W>
+		<frame_H>285.714</frame_H>
+	</highscore>
 </canon>
