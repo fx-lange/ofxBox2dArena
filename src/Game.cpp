@@ -7,7 +7,8 @@ namespace Box2dArena {
 Game::Game() :
 		canonPtr(NULL), playerPtr(NULL), targetsToShoot(0), tLastUpdate(-1), bPause(
 				true), totalTime(3), totalPoints(0), mode(0), gamemode(GAME), eTakePicture(
-				false), eStartGame(false), eGameDone(false), pictureCount(0), tmpNr(0) {
+				false), eStartGame(false), eGameDone(false), pictureCount(0), tmpNr(
+				0) {
 }
 
 Game::~Game() {
@@ -88,8 +89,9 @@ void Game::update() {
 		eGameDone = false;
 		totalPoints = score.getTotal();
 		points.push_back(totalPoints);
-		sort(points.begin(),points.end());
-		tmpNr = find(points.begin(),points.end(),totalPoints) - points.begin();
+		sort(points.begin(), points.end());
+		tmpNr = find(points.begin(), points.end(), totalPoints)
+				- points.begin();
 		tmpNr = points.size() - tmpNr;
 		pauseGame(true);
 		cout << "TOTAL: " << totalPoints << endl;
@@ -115,7 +117,7 @@ void Game::update() {
 		mode++;
 		if (mode < 3) {
 			canonPtr->nextMode();
-		}else{
+		} else {
 			mode = 2;
 		}
 	}
@@ -179,15 +181,16 @@ void Game::eventRestartGame(ofEventArgs & e) {
 void Game::takePicture() {
 	ofxCvColorImage & colorImg = playerPtr->getColorImg();
 	colorImg.setROI(frameX, frameY, frameW, frameH);
-	winnerImg.allocate(frameW,frameH,OF_IMAGE_COLOR);
+	winnerImg.allocate(frameW, frameH, OF_IMAGE_COLOR);
 	winnerImg.setFromPixels(colorImg.getRoiPixelsRef());
 	colorImg.resetROI();
 	string filename = ofToString(++pictureCount) + "_" + ofToString(totalPoints)
 			+ ".png";
 	winnerImg.saveImage("highscores/" + filename);
 	highscores.push_back(HighScore(totalPoints, winnerImg));
-	int maxSize = min<int>((int)highscores.size(),10);
-	partial_sort(highscores.begin(),highscores.begin()+maxSize,highscores.end(),Game::highscoreCompare);
+	int maxSize = min<int>((int) highscores.size(), 10);
+	partial_sort(highscores.begin(), highscores.begin() + maxSize,
+			highscores.end(), Game::highscoreCompare);
 }
 
 void Game::draw() {
@@ -204,7 +207,7 @@ void Game::draw() {
 		ofSetColor(220, 27, 42);
 		timeRemainingFont.drawString(timeStr, timeX, scoreY);
 		ofSetColor(245, 191, 42);
-		timeRemainingFont.drawString(timeStr, timeX-3, scoreY-2);
+		timeRemainingFont.drawString(timeStr, timeX - 3, scoreY - 2);
 		break;
 	}
 	case PICTURE:
@@ -236,10 +239,14 @@ void Game::drawPicture(bool debug) {
 	ofPopMatrix();
 
 	ofSetColor(0);
-	string scoreStr = ofToString(totalPoints) + " (#"+ofToString(tmpNr)+")";
+	string scoreStr = ofToString(totalPoints) + " (#" + ofToString(tmpNr) + ")";
 	ofRectangle rect = totalPointsFont.getStringBoundingBox(scoreStr, 0, 0);
+	ofSetColor(220, 27, 42);
 	totalPointsFont.drawString(scoreStr, totalPointsX - rect.width / 2.f,
 			totalPointsY);
+	ofSetColor(245, 191, 42);
+	totalPointsFont.drawString(scoreStr, totalPointsX - rect.width / 2.f - 5,
+			totalPointsY-4);
 
 	if (debug) {
 		ofSetColor(255, 0, 0);
@@ -257,11 +264,13 @@ void Game::drawHighscores() {
 	ofPushStyle();
 	ofSetRectMode(OF_RECTMODE_CORNER);
 	ofFill();
-	ofSetColor(0,0,0,128);
-	ofRect(-2000,-2000,4000,4000);
-	ofSetColor(188,188,188,225);
-	ofRectangle bb = highscoreHeadlineFont.getStringBoundingBox("HIGHSCORE",0,0);
-	highscoreHeadlineFont.drawString("HIGHSCORE",ofGetWidth()/2.f-bb.width/2.f,90);
+	ofSetColor(0, 0, 0, 128);
+	ofRect(-2000, -2000, 4000, 4000);
+	ofSetColor(188, 188, 188, 225);
+	ofRectangle bb = highscoreHeadlineFont.getStringBoundingBox("HIGHSCORE", 0,
+			0);
+	highscoreHeadlineFont.drawString("HIGHSCORE",
+			ofGetWidth() / 2.f - bb.width / 2.f, 90);
 	ofPopStyle();
 
 	vector<HighScore>::iterator it = highscores.begin();
@@ -270,9 +279,9 @@ void Game::drawHighscores() {
 	ofTranslate(highScoreX, highScoreY);
 	for (; it != highscores.end() && i < 10; ++it, ++i) {
 		ofSetColor(255);
-		if(i == 5){
-			ofTranslate(highScore2ndColOffset, 4 * (- highScoreLineH - 15));
-		}else{
+		if (i == 5) {
+			ofTranslate(highScore2ndColOffset, 4 * (-highScoreLineH - 15));
+		} else {
 			ofTranslate(0, highScoreLineH + 15);
 		}
 		ofPushMatrix();
@@ -285,7 +294,7 @@ void Game::drawHighscores() {
 				it->image.width * scale + 42, highScoreLineH * 0.25);
 		ofSetColor(245, 191, 42);
 		highscoreFont.drawString(ofToString(it->points),
-				it->image.width * scale + 40, highScoreLineH * 0.25 -2);
+				it->image.width * scale + 40, highScoreLineH * 0.25 - 2);
 	}
 	ofPopMatrix();
 }
