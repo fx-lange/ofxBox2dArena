@@ -5,6 +5,18 @@
 
 namespace Box2dArena {
 
+#define NUM_MODES 3
+
+struct ModePanel {
+	ofxPanel gui;
+	ofxFloatSlider density, bounce, friction;
+	ofxFloatSlider centerOffX, centerOffY;
+	ofxFloatSlider radius, minAngle, maxAngle;
+	ofxFloatSlider attractionAmt, angularVel, randomX, randomY;
+
+	void setupPanel(string group);
+};
+
 class TargetCanon {
 public:
 	TargetCanon();
@@ -12,20 +24,19 @@ public:
 
 	void setup(Arena * arena);
 
-	void drawDebug();
+	void drawDebug(int modeId);
+	void drawGui(int modeId);
 
 	void shootNextTarget();
-
-	ofxPanel gui;
+	void nextMode();
 
 protected:
 	Arena * arenaPtr;
 
 	void setupGui();
-	ofxFloatSlider density, bounce, friction;
-	ofxFloatSlider centerOffX, centerOffY;
-	ofxFloatSlider radius, minAngle, maxAngle;
-	ofxFloatSlider attractionAmt, angularVel, randomX,randomY;
+	vector<ModePanel*> modes;
+	ModePanel * mode;
+	int modeIdx;
 };
 
 } /* namespace Box2dArena */

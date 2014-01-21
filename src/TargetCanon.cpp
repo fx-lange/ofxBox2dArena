@@ -4,21 +4,8 @@
 
 namespace Box2dArena {
 
-TargetCanon::TargetCanon() :
-		arenaPtr(NULL) {
-}
-
-TargetCanon::~TargetCanon() {
-}
-
-void TargetCanon::setup(Arena * arena) {
-	arenaPtr = arena;
-
-	setupGui();
-}
-
-void TargetCanon::setupGui() {
-	gui.setup("canon", "arena.xml", 450, 60);
+void ModePanel::setupPanel(string group){
+	gui.setup(group, "arena.xml", 450, 60);
 	gui.add(density.setup("density", 3, 0, 5));
 	gui.add(bounce.setup("bounce", 0.53, 0, 2));
 	gui.add(friction.setup("friction", 0.9, 0, 5));
@@ -34,21 +21,50 @@ void TargetCanon::setupGui() {
 	gui.loadFromFile("arena.xml");
 }
 
-void TargetCanon::drawDebug() {
+TargetCanon::TargetCanon() :
+		arenaPtr(NULL),modeIdx(0),mode(NULL) {
+}
+
+TargetCanon::~TargetCanon() {
+}
+
+void TargetCanon::setup(Arena * arena) {
+	arenaPtr = arena;
+
+	setupGui();
+}
+
+void TargetCanon::setupGui() {
+	ModePanel * panel = new ModePanel();
+	panel->setupPanel("canon");
+	modes.push_back(panel);
+	panel = new ModePanel();
+	panel->setupPanel("canon2");
+	modes.push_back(panel);
+	panel = new ModePanel();
+	panel->setupPanel("canon3");
+	modes.push_back(panel);
+	mode = modes[0];
+}
+
+void TargetCanon::drawDebug(int modeId) {
 	ofPoint center(ofGetWidth() / 2.f, ofGetHeight() / 2.f);
 
 	ofPushStyle();
 	ofSetColor(0, 0, 255);
-	for (int angle = minAngle; angle < maxAngle; angle += 10) {
-		float x = center.x + centerOffX + radius * cos(ofDegToRad(angle + 90));
-		float y = center.y + centerOffY + radius * sin(ofDegToRad(angle + 90));
+	for (int angle = modes[modeId]->minAngle; angle < modes[modeId]->maxAngle; angle += 10) {
+		float x = center.x + modes[modeId]->centerOffX + modes[modeId]->radius * cos(ofDegToRad(angle + 90));
+		float y = center.y + modes[modeId]->centerOffY + modes[modeId]->radius * sin(ofDegToRad(angle + 90));
 		ofEllipse(x, y, 10, 10);
 	}
 	ofSetRectMode(OF_RECTMODE_CENTER);
 	ofNoFill();
-	ofRect(center.x + centerOffX,center.y + centerOffY,randomX*2,randomY*2);
+	ofRect(center.x + modes[modeId]->centerOffX,center.y + modes[modeId]->centerOffY,modes[modeId]->randomX*2,modes[modeId]->randomY*2);
 	ofPushStyle();
+}
 
+void TargetCanon::drawGui(int modeId){
+	modes[modeId]->gui.draw();
 }
 
 void TargetCanon::shootNextTarget() {
@@ -56,21 +72,26 @@ void TargetCanon::shootNextTarget() {
 
 	Target * target = new Target();
 
-	float angle = 90 + ofRandom(minAngle, maxAngle);
-	float tx = center.x + centerOffX + radius * cos(ofDegToRad(angle));
-	float ty = center.y + centerOffY + radius * sin(ofDegToRad(angle));
+	float angle = 90 + ofRandom(mode->minAngle, mode->maxAngle);
+	float tx = center.x + mode->centerOffX + mode->radius * cos(ofDegToRad(angle));
+	float ty = center.y + mode->centerOffY + mode->radius * sin(ofDegToRad(angle));
 
-	target->setPhysics(density, bounce, friction);
+	target->setPhysics(mode->density, mode->bounce, mode->friction);
 	target->setup(arenaPtr->getBox2d().getWorld(), tx, ty); //TODO use type instead of w,h
 
-	float atx = center.x + centerOffX + ofRandom(-randomX,randomX);
-	float aty = center.y + centerOffY + ofRandom(-randomY,randomY);
+	float atx = center.x + mode->centerOffX + ofRandom(-mode->randomX,mode->randomX);
+	float aty = center.y + mode->centerOffY + ofRandom(-mode->randomY,mode->randomY);
 
-	target->addAttractionPoint(atx, aty, attractionAmt); //TODO impulse instead of force?
-	target->body->SetAngularVelocity(ofRandom(angularVel));
+	target->addAttractionPoint(atx, aty, mode->attractionAmt); //TODO impulse instead of force?
+	target->body->SetAngularVelocity(ofRandom(mode->angularVel));
 	//TODO density to size factor
 
 	arenaPtr->addTarget(target);
+}
+
+void TargetCanon::nextMode(){
+	modeIdx = (modeIdx + 1) % NUM_MODES;
+	mode = modes[modeIdx];
 }
 
 } /* namespace Box2dArena */

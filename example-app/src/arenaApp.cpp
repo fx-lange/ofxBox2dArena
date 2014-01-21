@@ -6,6 +6,7 @@ bool bDrawDebug = true;
 bool eNextTarget = true;
 
 float scale = 1.f;
+int modeToShow = 0;
 
 //--------------------------------------------------------------
 void arenaApp::setup() {
@@ -49,7 +50,7 @@ void arenaApp::draw() {
 
 	if (bDrawDebug) {
 		arena.drawDebug();
-		canon.drawDebug();
+		canon.drawDebug(modeToShow);
 		player.drawDebug();
 	}
 
@@ -61,7 +62,7 @@ void arenaApp::draw() {
 		ofSetColor(255);
 		ofSetRectMode(OF_RECTMODE_CORNER);
 		arena.gui.draw();
-		canon.gui.draw();
+		canon.drawGui(modeToShow);
 		player.drawGui();
 		game.gui.draw();
 	}
@@ -98,6 +99,14 @@ void arenaApp::keyPressed(int key) {
 		break;
 	case '-':
 		scale /= 1.5f;
+		break;
+	case OF_KEY_LEFT:
+		modeToShow--;
+		modeToShow = modeToShow < 0 ? 0 : modeToShow;
+		break;
+	case OF_KEY_RIGHT:
+		modeToShow++;
+		modeToShow = modeToShow > 2 ? 2 : modeToShow;
 		break;
 	case 'n':
 	default:
