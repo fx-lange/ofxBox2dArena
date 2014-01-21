@@ -29,6 +29,7 @@ public:
 
 	void shootNextTarget();
 	void nextMode();
+	void resetMode();
 
 protected:
 	Arena * arenaPtr;

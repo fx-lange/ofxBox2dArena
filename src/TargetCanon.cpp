@@ -44,7 +44,7 @@ void TargetCanon::setupGui() {
 	panel = new ModePanel();
 	panel->setupPanel("canon3");
 	modes.push_back(panel);
-	mode = modes[0];
+	resetMode();
 }
 
 void TargetCanon::drawDebug(int modeId) {
@@ -91,6 +91,11 @@ void TargetCanon::shootNextTarget() {
 
 void TargetCanon::nextMode(){
 	modeIdx = (modeIdx + 1) % NUM_MODES;
+	mode = modes[modeIdx];
+}
+
+void TargetCanon::resetMode(){
+	modeIdx = 0;
 	mode = modes[modeIdx];
 }
 
