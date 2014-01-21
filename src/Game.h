@@ -9,17 +9,15 @@ namespace Box2dArena {
 
 class Player;
 
-enum GameMode{
-	GAME,
-	PICTURE,
-	HIGHSCORE
+enum GameMode {
+	GAME, PICTURE, HIGHSCORE
 };
 
-struct HighScore{
+struct HighScore {
 	int points;
 	ofImage image;
 
-	HighScore(int pts, ofImage img){
+	HighScore(int pts, ofImage img) {
 		points = pts;
 		image = img;
 	}
@@ -34,6 +32,7 @@ public:
 	void update();
 	void draw();
 	void drawPicture(bool debug = false);
+	void drawHighscores();
 
 	void gameDone(ofEventArgs & e);
 	void pauseGame(bool pause);
@@ -70,12 +69,13 @@ private:
 	GameMode gamemode;
 
 	ofxPanel highscorePanel;
-	ofxFloatSlider templateX,templateY,templateScale, templateOpacity;
+	ofxFloatSlider templateX, templateY, templateScale, templateOpacity;
 	ofxFloatSlider winnerImgX, winnerImgY, winnerImgScale;
 	ofxFloatSlider frameX, frameY, frameW, frameH;
 	ofxFloatSlider totalPointsX, totalPointsY;
+	ofxFloatSlider highScoreLineH, highScoreX, highScoreY;
 
-	ofTrueTypeFont totalPointsFont;
+	ofTrueTypeFont totalPointsFont, highscoreFont;
 
 	ofImage templateImg;
 

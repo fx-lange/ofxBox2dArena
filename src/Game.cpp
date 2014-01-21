@@ -21,6 +21,7 @@ void Game::setup(TargetCanon * canon, Player * player, string fontName) {
 
 	timeRemainingFont.loadFont(fontName, 30, true, true);
 	totalPointsFont.loadFont(fontName, 50, true, true);
+	highscoreFont.loadFont(fontName, 40, true, true);
 
 	gameTime.setup(totalTime * 1000, false);
 	gameTime.stopTimer();
@@ -59,6 +60,7 @@ void Game::setupGui() {
 	highscorePanel.add(frameH.setup("frame H", 500, 0, 2000));
 	highscorePanel.add(totalPointsX.setup("points X", 500, 0, 2000));
 	highscorePanel.add(totalPointsY.setup("points Y", 500, 0, 2000));
+	highscorePanel.add(highScoreLineH.setup("hs line height",100,1,250));
 	gui.add(&highscorePanel);
 	gui.loadFromFile("arena.xml");
 
@@ -72,6 +74,7 @@ void Game::update() {
 		if (eTakePicture) {
 			eTakePicture = false;
 			takePicture();
+			gamemode = HIGHSCORE;
 		}
 		return;
 	}
@@ -146,9 +149,9 @@ void Game::draw() {
 	}
 	case PICTURE:
 		drawPicture();
-		cout << pictureTimer.getTimeLeftInSeconds() << endl;
 		break;
 	case HIGHSCORE:
+		drawHighscores();
 		break;
 	}
 }
@@ -186,6 +189,27 @@ void Game::drawPicture(bool debug) {
 		ofPopMatrix();
 	}
 	ofPopStyle();
+}
+
+void Game::drawHighscores(){
+	//TODO draw headliner image
+	ofSetColor(255);
+	list<HighScore>::iterator it = highscores.begin();
+	int i = 0;
+	for(;it!=highscores.end();++it,++i){
+		ofPushMatrix();
+		ofTranslate(0,highScoreLineH*i);
+		ofPushMatrix();
+		float scale = highScoreLineH / it->image.height;
+		ofScale(scale,scale);
+		it->image.draw(0,0);
+		ofPopMatrix();
+		ofSetColor(220, 27, 42);
+		highscoreFont.drawString(ofToString(it->points),it->image.width * scale + 42,0);
+		ofSetColor(245, 191, 42);
+		highscoreFont.drawString(ofToString(it->points),it->image.width * scale + 40,-2);
+		ofPopMatrix();
+	}
 }
 
 void Game::pauseGame(bool pause) {
