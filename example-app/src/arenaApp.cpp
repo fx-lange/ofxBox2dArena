@@ -3,6 +3,7 @@
 bool bDrawGui = true;
 bool bDrawDebug = true;
 bool bDrawWinnerPictureDebug = false;
+bool bNoPlayer = true;
 
 bool eNextTarget = true;
 
@@ -50,6 +51,7 @@ void arenaApp::draw() {
 
 	if(game.isInGameMode()){
 		arena.draw();
+		if(!bNoPlayer)
 		player.draw(bDrawDebug);
 	}
 	game.draw();
@@ -90,7 +92,9 @@ void arenaApp::draw() {
 void arenaApp::keyPressed(int key) {
 	switch (key) {
 	case OF_KEY_RETURN:
-		game.pauseGame(false);
+//		game.pauseGame(false);
+		game.andAction();
+		bNoPlayer = false;
 		break;
 	case 'q':
 		player.changeKinectAngle(1);
