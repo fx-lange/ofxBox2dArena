@@ -192,7 +192,10 @@ void Game::draw() {
 
 		string timeStr = ofToString(min, 0, 2, '0') + ":"
 				+ ofToString(sec, 0, 2, '0');
+		ofSetColor(220, 27, 42);
 		timeRemainingFont.drawString(timeStr, timeX, scoreY);
+		ofSetColor(245, 191, 42);
+		timeRemainingFont.drawString(timeStr, timeX-3, scoreY-2);
 		break;
 	}
 	case PICTURE:

@@ -30,7 +30,10 @@ void Score::update(float hpDuration, float drifting) {
 
 void Score::draw(float x, float y) {
 	ofPushStyle();
+	ofSetColor(220, 27, 42);
 	font.drawString(ofToString(total), x, y);
+	ofSetColor(245, 191, 42);
+	font.drawString(ofToString(total), x-3, y-2);
 	list<HitPoint>::iterator it = hitPoints.begin();
 	for (; it != hitPoints.end(); it++) {
 		ofSetColor(220, 27, 42);
