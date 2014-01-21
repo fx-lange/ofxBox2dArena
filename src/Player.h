@@ -46,7 +46,7 @@ private:
 	ofxFloatSlider opacity, simplify;
 	ofxIntSlider stepSize;
 	ofxToggle bFlip, bDrawCurved;
-	ofxFloatSlider posX, posY, width, height;
+	ofxFloatSlider posX, posY, scaleContour;
 
 	// --- forces ---
 	Arena * arenaPtr;

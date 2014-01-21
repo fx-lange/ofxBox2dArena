@@ -49,8 +49,7 @@ void Player::setupGui() {
 	contour.add(bDrawCurved.setup("curved vertex", false));
 	contour.add(posX.setup("pos x", 0, -1000, 1000));
 	contour.add(posY.setup("pos y", 0, -1000, 1000));
-	contour.add(width.setup("width", 800, 0, 2000));
-	contour.add(height.setup("height", 600, 0, 2000));
+	contour.add(scaleContour.setup("scale", 1, 0, 3));
 	gui.add(&contour);
 	motionPanel.setup("motion");
 	motionPanel.add(testForce.setup("test force", 10, 0, 1000));
@@ -128,8 +127,8 @@ void Player::updateForces() {
 	for (int i = 0; i < (int) motions.size(); i++) {
 
 		ofPoint mp = motions[i].centroid;
-		mp.x *= width / kinect.width;
-		mp.y *= height / kinect.height;
+		mp.x *= scaleContour;
+		mp.y *= scaleContour;
 		mp.x += posX;
 		mp.y += posY;
 //		float area = motions[i].area;
@@ -166,20 +165,9 @@ void Player::drawContour(bool debug) {
 	ofEnableAlphaBlending();
 	ofFill();
 
-	float cWidth = contourFinder.getWidth();
-	float cHeight = contourFinder.getHeight();
-	float scalex = 1.0f, scaley = 1.0f;
-
-	if (cWidth != 0) {
-		scalex = width / cWidth;
-	}
-	if (cHeight != 0) {
-		scaley = height / cHeight;
-	}
-
 	ofPushMatrix();
 	ofTranslate(posX, posY);
-	ofScale(scalex, scaley, 0.0);
+	ofScale(scaleContour, scaleContour, 0.0);
 
 	ofPolyline line;
 	for (int i = 0; i < (int) contourFinder.blobs.size(); i++) { //TODO smoothing!
