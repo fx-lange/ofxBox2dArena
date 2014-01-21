@@ -15,6 +15,16 @@ enum GameMode{
 	HIGHSCORE
 };
 
+struct HighScore{
+	int points;
+	ofImage image;
+
+	HighScore(int pts, ofImage img){
+		points = pts;
+		image = img;
+	}
+};
+
 class Game {
 public:
 	Game();
@@ -27,6 +37,9 @@ public:
 
 	void gameDone(ofEventArgs & e);
 	void pauseGame(bool pause);
+
+	void eventTakePicture(ofEventArgs & e);
+	void takePicture();
 
 	Score * getScore();
 
@@ -65,6 +78,12 @@ private:
 	ofTrueTypeFont totalPointsFont;
 
 	ofImage templateImg;
+
+	ofxTimer pictureTimer;
+	bool eTakePicture;
+	int pictureCount;
+	list<HighScore> highscores;
+	ofImage winnerImg;
 };
 
 } /* namespace Box2dArena */

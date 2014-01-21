@@ -5,11 +5,13 @@ namespace Box2dArena {
 
 Game::Game() :
 		canonPtr(NULL), playerPtr(NULL), targetsToShoot(0), tLastUpdate(-1), bPause(
-				true), totalTime(45), mode(0), totalPoints(0), gamemode(GAME) {
+				true), totalTime(3), totalPoints(0), mode(0), gamemode(GAME), eTakePicture(
+				false), pictureCount(0) {
 }
 
 Game::~Game() {
 	gameTime.stopTimer();
+	pictureTimer.stopTimer();
 }
 
 void Game::setup(TargetCanon * canon, Player * player, string fontName) {
@@ -21,10 +23,14 @@ void Game::setup(TargetCanon * canon, Player * player, string fontName) {
 	totalPointsFont.loadFont(fontName, 50, true, true);
 
 	gameTime.setup(totalTime * 1000, false);
-	gameTime.pauseTimer();
+	gameTime.stopTimer();
 	ofAddListener(gameTime.TIMER_REACHED, this, &Game::gameDone);
 
 	templateImg.loadImage("templateImg.png");
+	pictureTimer.setup(5 * 1000, false);
+	pictureTimer.stopTimer();
+	ofAddListener(pictureTimer.TIMER_REACHED, this, &Game::eventTakePicture);
+	winnerImg.allocate(frameW, frameH, OF_IMAGE_COLOR);
 
 	setupGui();
 }
@@ -62,8 +68,13 @@ void Game::setupGui() {
 }
 
 void Game::update() {
-	if (bPause)
+	if (bPause) {
+		if (eTakePicture) {
+			eTakePicture = false;
+			takePicture();
+		}
 		return;
+	}
 
 	float timeLeft = gameTime.getTimeLeftInSeconds();
 	if (floor((totalTime - timeLeft) / (totalTime / 3)) > mode) {
@@ -99,7 +110,24 @@ void Game::gameDone(ofEventArgs & e) {
 	pauseGame(true);
 	cout << "TOTAL: " << totalPoints << endl;
 	gamemode = PICTURE;
-	//TODO timer for taking picture!
+	pictureTimer.startTimer();
+}
+
+void Game::eventTakePicture(ofEventArgs & e) {
+	eTakePicture = true;
+	pictureTimer.reset();
+	pictureTimer.pauseTimer();
+}
+
+void Game::takePicture() {
+	ofxCvColorImage & colorImg = playerPtr->getColorImg();
+	colorImg.setROI(frameX, frameY, frameW, frameH);
+	winnerImg.setFromPixels(colorImg.getRoiPixelsRef());
+	colorImg.resetROI();
+	string filename = ofToString(++pictureCount) + "_" + ofToString(totalPoints)
+			+ ".png";
+	winnerImg.saveImage("highscores/" + filename);
+	highscores.push_back(HighScore(totalPoints, winnerImg));
 }
 
 void Game::draw() {
@@ -118,6 +146,7 @@ void Game::draw() {
 	}
 	case PICTURE:
 		drawPicture();
+		cout << pictureTimer.getTimeLeftInSeconds() << endl;
 		break;
 	case HIGHSCORE:
 		break;
