@@ -78,9 +78,9 @@ private:
 	ofxFloatSlider winnerImgX, winnerImgY, winnerImgScale;
 	ofxFloatSlider frameX, frameY, frameW, frameH;
 	ofxFloatSlider totalPointsX, totalPointsY;
-	ofxFloatSlider highScoreLineH, highScoreX, highScoreY;
+	ofxFloatSlider highScoreLineH, highScoreX, highScoreY, highScore2ndColOffset;
 
-	ofTrueTypeFont totalPointsFont, highscoreFont;
+	ofTrueTypeFont totalPointsFont, highscoreFont, highscoreHeadlineFont;
 
 	ofImage templateImg;
 

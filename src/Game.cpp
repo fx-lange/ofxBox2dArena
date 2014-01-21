@@ -21,23 +21,24 @@ void Game::setup(TargetCanon * canon, Player * player, string fontName) {
 
 	timeRemainingFont.loadFont(fontName, 30, true, true);
 	totalPointsFont.loadFont(fontName, 50, true, true);
-	highscoreFont.loadFont(fontName, 40, true, true);
+	highscoreFont.loadFont(fontName, 50, true, true);
+	highscoreHeadlineFont.loadFont(fontName, 80, true, true);
 
 	gameTime.setup(totalTime * 1000, false);
 	gameTime.stopTimer();
 	ofAddListener(gameTime.TIMER_REACHED, this, &Game::gameDone);
 
 	templateImg.loadImage("templateImg.png");
-	pictureTimer.setup(5 * 1000, false);
+	pictureTimer.setup(1 * 1000, false);
 	pictureTimer.stopTimer();
 	ofAddListener(pictureTimer.TIMER_REACHED, this, &Game::eventTakePicture);
 	winnerImg.allocate(frameW, frameH, OF_IMAGE_COLOR);
 
-	showHighscoreTimer.setup(5 * 1000, false);
+	showHighscoreTimer.setup(1 * 1000, false);
 	showHighscoreTimer.stopTimer();
 	ofAddListener(showHighscoreTimer.TIMER_REACHED, this, &Game::eventShowGame);
 
-	restartGameTimer.setup(5 * 1000, false);
+	restartGameTimer.setup(1 * 1000, false);
 	restartGameTimer.stopTimer();
 	ofAddListener(restartGameTimer.TIMER_REACHED, this,
 			&Game::eventRestartGame);
@@ -71,7 +72,8 @@ void Game::setupGui() {
 	highscorePanel.add(totalPointsY.setup("points Y", 500, 0, 2000));
 	highscorePanel.add(highScoreLineH.setup("hs line height", 100, 1, 250));
 	highscorePanel.add(highScoreX.setup("highScore X", 0, -1500, 1500));
-	highscorePanel.add(highScoreX.setup("highScore Y", 0, -1500, 1500));
+	highscorePanel.add(highScoreY.setup("highScore Y", 0, -1500, 1500));
+	highscorePanel.add(highScore2ndColOffset.setup("col offset", 0, 0, 1500));
 	gui.add(&highscorePanel);
 	gui.loadFromFile("arena.xml");
 
@@ -240,14 +242,27 @@ void Game::drawPicture(bool debug) {
 
 void Game::drawHighscores() {
 	//TODO black + transparent rect - schrift 188,255
+	ofPushStyle();
+	ofSetRectMode(OF_RECTMODE_CORNER);
+	ofFill();
+	ofSetColor(0,0,0,128);
+	ofRect(-2000,-2000,4000,4000);
+	ofSetColor(188,188,188,225);
+	ofRectangle bb = highscoreHeadlineFont.getStringBoundingBox("HIGHSCORE",0,0);
+	highscoreHeadlineFont.drawString("HIGHSCORE",ofGetWidth()/2.f-bb.width/2.f,90);
+	ofPopStyle();
+
 	list<HighScore>::iterator it = highscores.begin();
 	int i = 0;
 	ofPushMatrix();
 	ofTranslate(highScoreX, highScoreY);
-	for (; it != highscores.end(); ++it, ++i) {
+	for (; it != highscores.end() && i < 10; ++it, ++i) {
 		ofSetColor(255);
-		ofPushMatrix();
-		ofTranslate(0, highScoreLineH * i + (i*5));
+		if(i == 5){
+			ofTranslate(highScore2ndColOffset, 4 * (- highScoreLineH - 15));
+		}else{
+			ofTranslate(0, highScoreLineH + 15);
+		}
 		ofPushMatrix();
 		float scale = highScoreLineH / it->image.height;
 		ofScale(scale, scale);
@@ -255,11 +270,10 @@ void Game::drawHighscores() {
 		ofPopMatrix();
 		ofSetColor(220, 27, 42);
 		highscoreFont.drawString(ofToString(it->points),
-				it->image.width * scale + 42, 0);
+				it->image.width * scale + 42, highScoreLineH * 0.25);
 		ofSetColor(245, 191, 42);
 		highscoreFont.drawString(ofToString(it->points),
-				it->image.width * scale + 40, -2);
-		ofPopMatrix();
+				it->image.width * scale + 40, highScoreLineH * 0.25 -2);
 	}
 	ofPopMatrix();
 }
@@ -269,7 +283,8 @@ Score * Game::getScore() {
 }
 
 bool Game::isInGameMode() {
-	return gamemode == GAME;
+	return gamemode != PICTURE; //TODO methond naming
 }
 
 } /* namespace Box2dArena */
+;

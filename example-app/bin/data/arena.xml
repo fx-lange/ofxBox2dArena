@@ -65,7 +65,9 @@
 		<points_X>867.347</points_X>
 			<points_Y>724.49</points_Y>
 		<hs_line_height>100</hs_line_height>
-			<highScore_Y>0</highScore_Y>
+			<highScore_Y>107.143</highScore_Y>
+		<highScore_X>214.286</highScore_X>
+			<col_offset>466.837</col_offset>
 		</highscore>
 	</game>
 <contour>
@@ -128,6 +130,8 @@
 	<points_X>867.347</points_X>
 		<points_Y>724.49</points_Y>
 	<hs_line_height>100</hs_line_height>
-		<highScore_Y>0</highScore_Y>
+		<highScore_Y>107.143</highScore_Y>
+	<highScore_X>214.286</highScore_X>
+		<col_offset>466.837</col_offset>
 	</highscore>
 </canon>
