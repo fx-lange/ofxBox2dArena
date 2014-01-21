@@ -22,6 +22,7 @@ void Player::setup(Arena * arena, Score * score) {
 
 	motion = new ofxCvMotionTemplates(kinect.width, kinect.height);
 	motion->setup();
+	motion->activateSilhouetteBuffer(10);
 	motion->gui.setPosition(60, 400);
 
 	colorImg.allocate(kinect.width, kinect.height);
@@ -103,7 +104,8 @@ bool Player::updateKinect() {
 }
 
 void Player::updateForces() {
-	motionImg = motion->calculateMotions(binaryImg);
+	motion->calculateMotions(binaryImg);
+	motionImg = motion->getBufferedSilhouetteImg(-9);
 	silhouettesImg.setFromPixels(motionImg.getPixels(), kinect.width,
 			kinect.height, OF_IMAGE_GRAYSCALE);
 	silhouettesImg.setImageType(OF_IMAGE_COLOR_ALPHA);
@@ -191,7 +193,7 @@ void Player::drawContour(bool debug) {
 		ofEndShape(false);
 	}
 
-	ofSetColor(150, 130, 20, 70);
+	ofSetColor(220, 220, 20, 60);
 	ofSetRectMode(OF_RECTMODE_CORNER);
 	silhouettesImg.draw(0, 0);
 
