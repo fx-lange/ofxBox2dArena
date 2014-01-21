@@ -126,10 +126,10 @@ void Player::updateForces() {
 		mp.y *= height / kinect.height;
 		mp.x += posX;
 		mp.y += posY;
-		float area = motions[i].area;
-		float count = motions[i].count;
-		cout << "c: " << count << " a: " << area << " c/a: " << count / area
-				<< endl;
+//		float area = motions[i].area;
+//		float count = motions[i].count;
+//		cout << "c: " << count << " a: " << area << " c/a: " << count / area
+//				<< endl;
 
 		for (it = targets.begin(); it != targets.end(); ++it) {
 			Target * t = *it;
@@ -142,7 +142,7 @@ void Player::updateForces() {
 				t->addRepulsionForce(mp, testForce);
 //				t->addForce(motions[i].forceDir.getNormalized(),testForce);
 //				t->addImpulseForce(motions[i].forceDir,ofVec2f(testForce,testForce));
-				if(!t->bHit){
+				if (!t->bHit) {
 					t->bHit = true;
 					scorePtr->addHit(t->getPosition());
 				}
@@ -230,6 +230,15 @@ void Player::drawDebug() {
 void Player::drawGui() {
 	gui.draw();
 	motion->gui.draw();
+}
+
+ofxCvColorImage & Player::getColorImg() {
+	colorImg.setFromPixels(kinect.getPixels(), kinect.width, kinect.height);
+	if (bFlip) {
+		cvFlip(colorImg.getCvImage(), colorImg.getCvImage(), 1);
+		colorImg.flagImageChanged();
+	}
+	return colorImg;
 }
 
 void Player::changeKinectAngle(int diff) {

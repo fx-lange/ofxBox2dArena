@@ -66,4 +66,32 @@
 		<test_force>469.388</test_force>
 		<min_distance>27.1684</min_distance>
 	</motion>
+<canon3>
+		<density>0.95</density>
+		<bounce>0.53</bounce>
+		<friction>0.9</friction>
+		<radius>1398.5</radius>
+		<min_angle>0</min_angle>
+		<max_angle>360</max_angle>
+		<offset_X>0</offset_X>
+		<offset_Y>0</offset_Y>
+		<attraction_amount>10</attraction_amount>
+		<angular_vel>1</angular_vel>
+		<random_min>50</random_min>
+		<random_max>50</random_max>
+	</canon3>
+<canon2>
+		<density>0.975</density>
+		<bounce>0.53</bounce>
+		<friction>0.9</friction>
+		<radius>786</radius>
+		<min_angle>0</min_angle>
+		<max_angle>360</max_angle>
+		<offset_X>0</offset_X>
+		<offset_Y>0</offset_Y>
+		<attraction_amount>35.5</attraction_amount>
+		<angular_vel>1</angular_vel>
+		<random_min>50</random_min>
+		<random_max>50</random_max>
+	</canon2>
 </canon>

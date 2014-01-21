@@ -22,6 +22,7 @@ public:
 	void draw(bool debug = false);
 	void drawDebug();
 	void drawGui();
+	ofxCvColorImage & getColorImg();
 
 	void changeKinectAngle(int diff);
 
