@@ -69,7 +69,21 @@ void Arena::updateTargets(Score * score) {
 	}
 }
 
-void Arena::draw() {
+void Arena::drawTargets() {
+	ofPushStyle();
+	ofSetColor(255);
+
+	//targets
+	list<Target*>::iterator it = targets.begin();
+	for (; it != targets.end(); it++) {
+		Target * target = *it;
+		target->draw();
+	}
+
+	ofPopStyle();
+}
+
+void Arena::drawBg(){
 	ofPushStyle();
 	ofSetColor(255);
 
@@ -82,14 +96,6 @@ void Arena::draw() {
 	background.draw(0, 0);
 	ofPopStyle();
 	ofPopMatrix();
-
-	//targets
-	list<Target*>::iterator it = targets.begin();
-	for (; it != targets.end(); it++) {
-		Target * target = *it;
-		target->draw();
-	}
-
 	ofPopStyle();
 }
 

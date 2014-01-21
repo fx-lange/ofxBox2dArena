@@ -1,10 +1,10 @@
 <canon>
-	<density>0.9</density>
+	<density>1.875</density>
 	<bounce>0.53</bounce>
 	<friction>0.225</friction>
-	<radius>1080</radius>
-	<min_angle>75.6</min_angle>
-	<max_angle>282.6</max_angle>
+	<radius>810.5</radius>
+	<min_angle>102.6</min_angle>
+	<max_angle>270</max_angle>
 <arena>
 		<gravity>1.95</gravity>
 	<bg_offset_X>15</bg_offset_X>
@@ -15,42 +15,42 @@
 		<destroy_level>1302</destroy_level>
 	</arena>
 <canon/>
-	<offset_X>0</offset_X>
-	<offset_Y>175</offset_Y>
-	<attraction_amount>50</attraction_amount>
-<random_min>382</random_min>
-	<random_max>62</random_max>
+	<offset_X>5</offset_X>
+	<offset_Y>-180</offset_Y>
+	<attraction_amount>23.5</attraction_amount>
+<random_min>334</random_min>
+	<random_max>240</random_max>
 <angular_vel>3.95</angular_vel>
 <player>
 		<flip_src>1</flip_src>
 	<contour>
-			<kinect_tilt>4.2653</kinect_tilt>
-			<kinect_near>243.291</kinect_near>
-			<kinect_far>118.393</kinect_far>
-			<opacity>96.2755</opacity>
+			<kinect_tilt>-3.7347</kinect_tilt>
+			<kinect_near>187.347</kinect_near>
+			<kinect_far>45.5357</kinect_far>
+			<opacity>111.888</opacity>
 			<step_size>1</step_size>
 			<simplify>2.14375</simplify>
 			<curved_vertex>0</curved_vertex>
-			<pos_x>30.6122</pos_x>
+			<pos_x>-30.6122</pos_x>
 			<pos_y>0</pos_y>
 			<width>1030.61</width>
 			<height>775.51</height>
-		<scale>1.5</scale>
+		<scale>1.69898</scale>
 		</contour>
 		<motion>
-			<test_force>811.224</test_force>
-		<min_distance>27.1684</min_distance>
+			<test_force>331.633</test_force>
+		<min_distance>5</min_distance>
 		</motion>
 	</player>
 <game>
-		<targets_per_sec>1.5</targets_per_sec>
-	<score_x>35</score_x>
+		<targets_per_sec>1.65</targets_per_sec>
+	<score_x>55</score_x>
 		<score_y>60</score_y>
 	<time_x>887.5</time_x>
 		<hp_duration>1.58</hp_duration>
 	<score_drifting>0.83</score_drifting>
-	<targets_per_sec_2>1</targets_per_sec_2>
-		<targets_per_sec_3>1</targets_per_sec_3>
+	<targets_per_sec_2>2.475</targets_per_sec_2>
+		<targets_per_sec_3>4.725</targets_per_sec_3>
 		<highscore>
 			<template_X>0</template_X>
 			<template_Y>0</template_Y>
@@ -67,55 +67,55 @@
 			<points_Y>653.061</points_Y>
 		<hs_line_height>100</hs_line_height>
 			<highScore_Y>107.143</highScore_Y>
-		<highScore_X>214.286</highScore_X>
-			<col_offset>466.837</col_offset>
+		<highScore_X>107.143</highScore_X>
+			<col_offset>482.143</col_offset>
 		</highscore>
 	</game>
 <contour>
-		<kinect_tilt>4.2653</kinect_tilt>
-		<kinect_near>243.291</kinect_near>
-		<kinect_far>118.393</kinect_far>
-		<opacity>96.2755</opacity>
+		<kinect_tilt>-3.7347</kinect_tilt>
+		<kinect_near>187.347</kinect_near>
+		<kinect_far>45.5357</kinect_far>
+		<opacity>122.296</opacity>
 		<step_size>1</step_size>
 		<simplify>2.14375</simplify>
 		<curved_vertex>0</curved_vertex>
-		<pos_x>30.6122</pos_x>
+		<pos_x>-30.6122</pos_x>
 		<pos_y>0</pos_y>
 		<width>1030.61</width>
 		<height>775.51</height>
-	<scale>1.5</scale>
+	<scale>1.69898</scale>
 	</contour>
 <motion>
-		<test_force>811.224</test_force>
-		<min_distance>27.1684</min_distance>
+		<test_force>331.633</test_force>
+		<min_distance>19.1071</min_distance>
 	</motion>
 <canon3>
-		<density>0.95</density>
+		<density>1.175</density>
 		<bounce>0.53</bounce>
 		<friction>0.9</friction>
-		<radius>1398.5</radius>
-		<min_angle>0</min_angle>
-		<max_angle>360</max_angle>
+		<radius>1031</radius>
+		<min_angle>75.6</min_angle>
+		<max_angle>291.6</max_angle>
 		<offset_X>0</offset_X>
-		<offset_Y>0</offset_Y>
-		<attraction_amount>10</attraction_amount>
+		<offset_Y>-135</offset_Y>
+		<attraction_amount>28</attraction_amount>
 		<angular_vel>1</angular_vel>
-		<random_min>50</random_min>
-		<random_max>50</random_max>
+		<random_min>350</random_min>
+		<random_max>340</random_max>
 	</canon3>
 <canon2>
-		<density>0.975</density>
-		<bounce>0.53</bounce>
+		<density>0.8</density>
+		<bounce>0.4</bounce>
 		<friction>0.9</friction>
-		<radius>786</radius>
-		<min_angle>0</min_angle>
-		<max_angle>360</max_angle>
+		<radius>810.5</radius>
+		<min_angle>66.6</min_angle>
+		<max_angle>295.2</max_angle>
 		<offset_X>0</offset_X>
-		<offset_Y>0</offset_Y>
-		<attraction_amount>35.5</attraction_amount>
+		<offset_Y>40</offset_Y>
+		<attraction_amount>50</attraction_amount>
 		<angular_vel>1</angular_vel>
-		<random_min>50</random_min>
-		<random_max>50</random_max>
+		<random_min>400</random_min>
+		<random_max>256</random_max>
 	</canon2>
 <highscore>
 		<template_X>0</template_X>
@@ -125,15 +125,15 @@
 		<winnerImg_X>61.2245</winnerImg_X>
 		<winnerImg_Y>68.8775</winnerImg_Y>
 		<winnerImg_scale>1.40816</winnerImg_scale>
-		<frame_X>173.469</frame_X>
-		<frame_Y>81.6327</frame_Y>
-		<frame_W>326.531</frame_W>
-		<frame_H>214.286</frame_H>
+		<frame_X>153.061</frame_X>
+		<frame_Y>71.4286</frame_Y>
+		<frame_W>367.347</frame_W>
+		<frame_H>234.694</frame_H>
 	<points_X>540.816</points_X>
 		<points_Y>653.061</points_Y>
 	<hs_line_height>100</hs_line_height>
 		<highScore_Y>107.143</highScore_Y>
-	<highScore_X>214.286</highScore_X>
-		<col_offset>466.837</col_offset>
+	<highScore_X>107.143</highScore_X>
+		<col_offset>482.143</col_offset>
 	</highscore>
 </canon>

@@ -15,7 +15,8 @@ public:
 
 	void setup();
 	void update(Score * score);
-	void draw();
+	void drawTargets();
+	void drawBg();
 	void drawDebug();
 
 	void loadBackground(string filename);

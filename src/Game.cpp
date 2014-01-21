@@ -6,7 +6,7 @@ namespace Box2dArena {
 
 Game::Game() :
 		canonPtr(NULL), playerPtr(NULL), targetsToShoot(0), tLastUpdate(-1), bPause(
-				true), totalTime(15), totalPoints(0), mode(0), gamemode(GAME), eTakePicture(
+				true), totalTime(90), totalPoints(0), mode(0), gamemode(GAME), eTakePicture(
 				false), eStartGame(false), eGameDone(false), pictureCount(0), tmpNr(
 				0), bWaitForAction(false), bGettingReady(false) {
 }
@@ -32,12 +32,12 @@ void Game::setup(TargetCanon * canon, Player * player, string fontName) {
 	ofAddListener(gameTime.TIMER_REACHED, this, &Game::gameDone);
 
 	templateImg.loadImage("templateImg.png");
-	pictureTimer.setup(1 * 1000, false);
+	pictureTimer.setup(5 * 1000, false);
 	pictureTimer.stopTimer();
 	ofAddListener(pictureTimer.TIMER_REACHED, this, &Game::eventTakePicture);
 	winnerImg.allocate(frameW, frameH, OF_IMAGE_COLOR);
 
-	showHighscoreTimer.setup(1 * 1000, false);
+	showHighscoreTimer.setup(15 * 1000, false);
 	showHighscoreTimer.stopTimer();
 	ofAddListener(showHighscoreTimer.TIMER_REACHED, this, &Game::eventShowGame);
 
@@ -315,10 +315,10 @@ void Game::drawHighscores() {
 		ofPopMatrix();
 		ofSetColor(220, 27, 42);
 		highscoreFont.drawString(ofToString(it->points),
-				it->image.width * scale + 42, highScoreLineH * 0.25);
+				it->image.width * scale + 22, highScoreLineH * 0.25);
 		ofSetColor(245, 191, 42);
 		highscoreFont.drawString(ofToString(it->points),
-				it->image.width * scale + 40, highScoreLineH * 0.25 - 2);
+				it->image.width * scale + 20, highScoreLineH * 0.25 - 2);
 	}
 	ofPopMatrix();
 }

@@ -50,9 +50,10 @@ void arenaApp::draw() {
 	ofTranslate(-ofGetWidth() / 2.f, -ofGetHeight() / 2.f);
 
 	if(game.isInGameMode()){
-		arena.draw();
+		arena.drawBg();
 		if(!bNoPlayer)
-		player.draw(bDrawDebug);
+			player.draw(bDrawDebug);
+		arena.drawTargets();
 	}
 	game.draw();
 
