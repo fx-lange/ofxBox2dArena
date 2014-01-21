@@ -7,7 +7,7 @@ namespace Box2dArena {
 Game::Game() :
 		canonPtr(NULL), playerPtr(NULL), targetsToShoot(0), tLastUpdate(-1), bPause(
 				true), totalTime(3), totalPoints(0), mode(0), gamemode(GAME), eTakePicture(
-				false), eStartGame(false), eGameDone(false), pictureCount(0) {
+				false), eStartGame(false), eGameDone(false), pictureCount(0), tmpNr(0) {
 }
 
 Game::~Game() {
@@ -87,6 +87,10 @@ void Game::update() {
 	if (eGameDone) {
 		eGameDone = false;
 		totalPoints = score.getTotal();
+		points.push_back(totalPoints);
+		sort(points.begin(),points.end());
+		tmpNr = find(points.begin(),points.end(),totalPoints) - points.begin();
+		tmpNr = points.size() - tmpNr;
 		pauseGame(true);
 		cout << "TOTAL: " << totalPoints << endl;
 		gamemode = PICTURE;
@@ -230,7 +234,7 @@ void Game::drawPicture(bool debug) {
 	ofPopMatrix();
 
 	ofSetColor(0);
-	string scoreStr = ofToString(totalPoints) + " (#01)";
+	string scoreStr = ofToString(totalPoints) + " (#"+ofToString(tmpNr)+")";
 	ofRectangle rect = totalPointsFont.getStringBoundingBox(scoreStr, 0, 0);
 	totalPointsFont.drawString(scoreStr, totalPointsX - rect.width / 2.f,
 			totalPointsY);

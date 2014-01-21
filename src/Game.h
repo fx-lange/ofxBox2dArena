@@ -88,7 +88,10 @@ private:
 	bool eTakePicture, eStartGame, eGameDone;
 	int pictureCount;
 	vector<HighScore> highscores;
+	vector<int> points;
+
 	ofImage winnerImg;
+	int tmpNr;
 
 	ofxTimer showHighscoreTimer, restartGameTimer;
 
