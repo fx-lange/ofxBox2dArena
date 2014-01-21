@@ -51,6 +51,7 @@ private:
 	ofxTimer gameTime;
 	bool bPause;
 	float totalTime;
+	int totalPoints;
 	int mode;
 
 	GameMode gamemode;
@@ -59,6 +60,9 @@ private:
 	ofxFloatSlider templateX,templateY,templateScale, templateOpacity;
 	ofxFloatSlider winnerImgX, winnerImgY, winnerImgScale;
 	ofxFloatSlider frameX, frameY, frameW, frameH;
+	ofxFloatSlider totalPointsX, totalPointsY;
+
+	ofTrueTypeFont totalPointsFont;
 
 	ofImage templateImg;
 };

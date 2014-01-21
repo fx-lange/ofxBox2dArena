@@ -5,7 +5,7 @@ namespace Box2dArena {
 
 Game::Game() :
 		canonPtr(NULL), playerPtr(NULL), targetsToShoot(0), tLastUpdate(-1), bPause(
-				true), totalTime(45), mode(0), gamemode(GAME) {
+				true), totalTime(45), mode(0), totalPoints(0), gamemode(GAME) {
 }
 
 Game::~Game() {
@@ -18,6 +18,7 @@ void Game::setup(TargetCanon * canon, Player * player, string fontName) {
 	score.setup(fontName);
 
 	timeRemainingFont.loadFont(fontName, 30, true, true);
+	totalPointsFont.loadFont(fontName, 50, true, true);
 
 	gameTime.setup(totalTime * 1000, false);
 	gameTime.pauseTimer();
@@ -50,6 +51,8 @@ void Game::setupGui() {
 	highscorePanel.add(frameY.setup("frame Y", 0, -500, 500));
 	highscorePanel.add(frameW.setup("frame W", 500, 0, 2000));
 	highscorePanel.add(frameH.setup("frame H", 500, 0, 2000));
+	highscorePanel.add(totalPointsX.setup("points X", 500, 0, 2000));
+	highscorePanel.add(totalPointsY.setup("points Y", 500, 0, 2000));
 	gui.add(&highscorePanel);
 	gui.loadFromFile("arena.xml");
 
@@ -92,7 +95,7 @@ void Game::update() {
 }
 
 void Game::gameDone(ofEventArgs & e) {
-	int totalPoints = score.getTotal();
+	totalPoints = score.getTotal();
 	pauseGame(true);
 	cout << "TOTAL: " << totalPoints << endl;
 	gamemode = PICTURE;
@@ -139,6 +142,12 @@ void Game::drawPicture(bool debug) {
 	ofScale(templateScale, templateScale);
 	templateImg.draw(0, 0);
 	ofPopMatrix();
+
+	ofSetColor(0);
+	string scoreStr = ofToString(totalPoints) + " (#01)";
+	ofRectangle rect = totalPointsFont.getStringBoundingBox(scoreStr, 0, 0);
+	totalPointsFont.drawString(scoreStr, totalPointsX - rect.width / 2.f,
+			totalPointsY);
 
 	if (debug) {
 		ofSetColor(255, 0, 0);
