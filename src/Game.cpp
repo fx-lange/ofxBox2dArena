@@ -115,6 +115,8 @@ void Game::update() {
 		mode++;
 		if (mode < 3) {
 			canonPtr->nextMode();
+		}else{
+			mode = 2;
 		}
 	}
 
