@@ -8,7 +8,7 @@ Game::Game() :
 		canonPtr(NULL), playerPtr(NULL), targetsToShoot(0), tLastUpdate(-1), bPause(
 				true), totalTime(3), totalPoints(0), mode(0), gamemode(GAME), eTakePicture(
 				false), eStartGame(false), eGameDone(false), pictureCount(0), tmpNr(
-				0) {
+				0), bWaitForAction(false), bGettingReady(false) {
 }
 
 Game::~Game() {
@@ -25,6 +25,7 @@ void Game::setup(TargetCanon * canon, Player * player, string fontName) {
 	totalPointsFont.loadFont(fontName, 50, true, true);
 	highscoreFont.loadFont(fontName, 50, true, true);
 	highscoreHeadlineFont.loadFont(fontName, 80, true, true);
+	getReadyFont.loadFont(fontName, 100, true, true);
 
 	gameTime.setup(totalTime * 1000, false);
 	gameTime.stopTimer();
@@ -40,10 +41,10 @@ void Game::setup(TargetCanon * canon, Player * player, string fontName) {
 	showHighscoreTimer.stopTimer();
 	ofAddListener(showHighscoreTimer.TIMER_REACHED, this, &Game::eventShowGame);
 
-	restartGameTimer.setup(1 * 1000, false);
-	restartGameTimer.stopTimer();
-	ofAddListener(restartGameTimer.TIMER_REACHED, this,
-			&Game::eventRestartGame);
+	getReadyTimer.setup(5 * 1000, false);
+	getReadyTimer.stopTimer();
+	ofAddListener(getReadyTimer.TIMER_REACHED, this,
+			&Game::eventGo);
 
 	setupGui();
 }
@@ -148,7 +149,6 @@ void Game::pauseGame(bool pause) {
 	if (pause == false) {
 		mode = 0;
 		canonPtr->resetMode();
-		//TODO use restart COUNTDOWN here instead!
 		gameTime.reset();
 		gameTime.startTimer();
 		tLastUpdate = -1;
@@ -170,11 +170,18 @@ void Game::eventTakePicture(ofEventArgs & e) {
 
 void Game::eventShowGame(ofEventArgs & e) {
 	eStartGame = true;
-	restartGameTimer.reset();
-	restartGameTimer.startTimer();
+	bWaitForAction = true;
 }
 
-void Game::eventRestartGame(ofEventArgs & e) {
+void Game::andAction(){
+	bWaitForAction = false;
+	bGettingReady = true;
+	getReadyTimer.reset();
+	getReadyTimer.startTimer();
+}
+
+void Game::eventGo(ofEventArgs & e) {
+	bGettingReady = false;
 	pauseGame(false);
 }
 
@@ -196,18 +203,7 @@ void Game::takePicture() {
 void Game::draw() {
 	switch ((int) gamemode) {
 	case GAME: {
-		score.draw(scoreX, scoreY);
-
-		int timeRemaingSec = gameTime.getTimeLeftInSeconds();
-		int sec = timeRemaingSec % 60;
-		int min = floor(timeRemaingSec / 60.f);
-
-		string timeStr = ofToString(min, 0, 2, '0') + ":"
-				+ ofToString(sec, 0, 2, '0');
-		ofSetColor(220, 27, 42);
-		timeRemainingFont.drawString(timeStr, timeX, scoreY);
-		ofSetColor(245, 191, 42);
-		timeRemainingFont.drawString(timeStr, timeX - 3, scoreY - 2);
+		drawGame();
 		break;
 	}
 	case PICTURE:
@@ -216,6 +212,35 @@ void Game::draw() {
 	case HIGHSCORE:
 		drawHighscores();
 		break;
+	}
+}
+
+void Game::drawGame(){
+	score.draw(scoreX, scoreY);
+
+	int timeRemaingSec = gameTime.getTimeLeftInSeconds();
+	int sec = timeRemaingSec % 60;
+	int min = floor(timeRemaingSec / 60.f);
+
+	string timeStr = ofToString(min, 0, 2, '0') + ":"
+			+ ofToString(sec, 0, 2, '0');
+	ofSetColor(220, 27, 42);
+	timeRemainingFont.drawString(timeStr, timeX, scoreY);
+	ofSetColor(245, 191, 42);
+	timeRemainingFont.drawString(timeStr, timeX - 3, scoreY - 2);
+
+	//get ready timer
+	if(bGettingReady){
+		timeRemaingSec = getReadyTimer.getTimeLeftInSeconds();
+		string secStr = ofToString(timeRemaingSec);
+		if(timeRemaingSec == 0){
+			secStr = "GO!";
+		}
+		ofRectangle bb = getReadyFont.getStringBoundingBox(secStr,0,0);
+		ofSetColor(220, 27, 42);
+		getReadyFont.drawString(secStr, ofGetWidth()/2.f - bb.width/2.f, ofGetHeight()/2.f);
+		ofSetColor(245, 191, 42);
+		getReadyFont.drawString(secStr, ofGetWidth()/2.f - bb.width/2.f-10, ofGetHeight()/2.f-8);
 	}
 }
 
@@ -246,7 +271,7 @@ void Game::drawPicture(bool debug) {
 			totalPointsY);
 	ofSetColor(245, 191, 42);
 	totalPointsFont.drawString(scoreStr, totalPointsX - rect.width / 2.f - 5,
-			totalPointsY-4);
+			totalPointsY - 4);
 
 	if (debug) {
 		ofSetColor(255, 0, 0);
@@ -260,7 +285,6 @@ void Game::drawPicture(bool debug) {
 }
 
 void Game::drawHighscores() {
-	//TODO black + transparent rect - schrift 188,255
 	ofPushStyle();
 	ofSetRectMode(OF_RECTMODE_CORNER);
 	ofFill();
@@ -304,7 +328,11 @@ Score * Game::getScore() {
 }
 
 bool Game::isInGameMode() {
-	return gamemode != PICTURE; //TODO methond naming
+	return gamemode != PICTURE; //TODO method naming
+}
+
+bool Game::isWaitingForAction(){
+	return bWaitForAction;
 }
 
 } /* namespace Box2dArena */

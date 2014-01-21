@@ -32,7 +32,10 @@ void arenaApp::update() {
 
 	game.update();
 	arena.update(game.getScore());
-	player.update();
+	bool action = player.update();
+	if(game.isWaitingForAction() && action){
+		game.andAction();
+	}
 }
 
 //--------------------------------------------------------------

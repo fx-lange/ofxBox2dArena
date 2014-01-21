@@ -33,6 +33,7 @@ public:
 	void draw();
 	void drawPicture(bool debug = false);
 	void drawHighscores();
+	void drawGame();
 
 	void gameDone(ofEventArgs & e);
 	void pauseGame(bool pause);
@@ -41,9 +42,11 @@ public:
 	void takePicture();
 
 	void eventShowGame(ofEventArgs & e);
-	void eventRestartGame(ofEventArgs & e);
+	void eventGo(ofEventArgs & e);
 
 	bool isInGameMode();
+	bool isWaitingForAction();
+	void andAction();
 
 	Score * getScore();
 
@@ -78,9 +81,10 @@ private:
 	ofxFloatSlider winnerImgX, winnerImgY, winnerImgScale;
 	ofxFloatSlider frameX, frameY, frameW, frameH;
 	ofxFloatSlider totalPointsX, totalPointsY;
-	ofxFloatSlider highScoreLineH, highScoreX, highScoreY, highScore2ndColOffset;
+	ofxFloatSlider highScoreLineH, highScoreX, highScoreY,
+			highScore2ndColOffset;
 
-	ofTrueTypeFont totalPointsFont, highscoreFont, highscoreHeadlineFont;
+	ofTrueTypeFont totalPointsFont, highscoreFont, highscoreHeadlineFont, getReadyFont;
 
 	ofImage templateImg;
 
@@ -93,9 +97,10 @@ private:
 	ofImage winnerImg;
 	int tmpNr;
 
-	ofxTimer showHighscoreTimer, restartGameTimer;
+	ofxTimer showHighscoreTimer, getReadyTimer;
+	bool bWaitForAction, bGettingReady;
 
-	static bool highscoreCompare(const HighScore & l, const HighScore & r){
+	static bool highscoreCompare(const HighScore & l, const HighScore & r) {
 		return l.points >= r.points;
 	}
 };

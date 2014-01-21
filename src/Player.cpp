@@ -59,13 +59,15 @@ void Player::setupGui() {
 	gui.loadFromFile("arena.xml");
 }
 
-void Player::update() {
+bool Player::update() {
 
-	updateKinect();
+	bool action = updateKinect();
 	updateForces();
+	return action;
 }
 
-void Player::updateKinect() {
+bool Player::updateKinect() {
+	bool action = false;
 	kinect.update();
 
 	if (kinect.isFrameNew()) {
@@ -94,7 +96,11 @@ void Player::updateKinect() {
 				(kinect.width * kinect.height) / 2, 20, true, true);//TODO GUI
 		//TODO holes! learning opencv page 237! use different sorting and find way to draw poly with hole
 		//http://forum.openframeworks.cc/t/circles-with-holes-or-with-stroke/8173/3
+		if(contourFinder.nBlobs>0){
+			action = true;
+		}
 	}
+	return action;
 }
 
 void Player::updateForces() {

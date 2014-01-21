@@ -17,7 +17,7 @@ public:
 
 	void setup(Arena * arena, Score * score);
 	void setupGui();
-	void update();
+	bool update();
 
 	void draw(bool debug = false);
 	void drawDebug();
@@ -27,7 +27,7 @@ public:
 	void changeKinectAngle(int diff);
 
 private:
-	void updateKinect();
+	bool updateKinect();
 	void updateForces();
 	void drawContour(bool debug);
 
