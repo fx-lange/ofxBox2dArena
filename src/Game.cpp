@@ -82,6 +82,7 @@ void Game::pauseGame(bool pause) {
 	score.stopCounting(pause);
 	if (bPause == false) {
 		gameTime.reset();
+
 		tLastUpdate = -1;
 	}
 }

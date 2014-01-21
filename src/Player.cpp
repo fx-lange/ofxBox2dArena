@@ -19,7 +19,6 @@ void Player::setup(Arena * arena, Score * score) {
 	kinect.open();
 
 	kinectAngle = 0;
-	kinect.setCameraTiltAngle(kinectAngle);
 
 	motion = new ofxCvMotionTemplates(kinect.width, kinect.height);
 	motion->setup();
@@ -34,6 +33,7 @@ void Player::setup(Arena * arena, Score * score) {
 	silhouettesImg.allocate(kinect.width, kinect.height, OF_IMAGE_GRAYSCALE);
 
 	setupGui();
+	kinect.setCameraTiltAngle(kinectAngle);
 }
 
 void Player::setupGui() {

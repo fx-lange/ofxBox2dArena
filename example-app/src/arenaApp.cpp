@@ -44,7 +44,7 @@ void arenaApp::draw() {
 	ofTranslate(-ofGetWidth() / 2.f, -ofGetHeight() / 2.f);
 
 	arena.draw();
-	player.draw();
+	player.draw(bDrawDebug);
 	game.draw();
 
 	if (bDrawDebug) {
@@ -79,7 +79,7 @@ void arenaApp::draw() {
 void arenaApp::keyPressed(int key) {
 	switch (key) {
 	case OF_KEY_RETURN:
-		game.pauseGame(true);
+		game.pauseGame(false);
 		break;
 	case 'q':
 		player.changeKinectAngle(1);

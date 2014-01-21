@@ -34,9 +34,9 @@ void Score::draw(float x, float y) {
 	list<HitPoint>::iterator it = hitPoints.begin();
 	for (; it != hitPoints.end(); it++) {
 		ofSetColor(220, 27, 42);
-		hitFont.drawString(ofToString(HIT), (*it).pos.x, (*it).pos.y);
+		hitFont.drawString("+"+ofToString(HIT), (*it).pos.x, (*it).pos.y);
 		ofSetColor(245, 191, 42);
-		hitFont.drawString(ofToString(HIT), (*it).pos.x - 5, (*it).pos.y - 4);
+		hitFont.drawString("+"+ofToString(HIT), (*it).pos.x - 5, (*it).pos.y - 4);
 	}
 	ofPopStyle();
 }

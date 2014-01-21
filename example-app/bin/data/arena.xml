@@ -1,69 +1,69 @@
 <canon>
-	<density>1.5</density>
+	<density>0.9</density>
 	<bounce>0.53</bounce>
-	<friction>2</friction>
-	<radius>1129</radius>
-	<min_angle>45</min_angle>
-	<max_angle>315</max_angle>
+	<friction>0.225</friction>
+	<radius>1080</radius>
+	<min_angle>75.6</min_angle>
+	<max_angle>282.6</max_angle>
 <arena>
 		<gravity>1.95</gravity>
 	<bg_offset_X>15</bg_offset_X>
 		<bg_offset_Y>15</bg_offset_Y>
 		<bg_scale>0.69</bg_scale>
-	<arena_width>1176</arena_width>
-		<arena_height>600</arena_height>
+	<arena_width>1028</arena_width>
+		<arena_height>769</arena_height>
 		<destroy_level>1302</destroy_level>
 	</arena>
 <canon/>
 	<offset_X>0</offset_X>
-	<offset_Y>0</offset_Y>
-	<attraction_amount>24.5</attraction_amount>
-<random_min>232</random_min>
-	<random_max>193</random_max>
-<angular_vel>2.2</angular_vel>
+	<offset_Y>175</offset_Y>
+	<attraction_amount>50</attraction_amount>
+<random_min>382</random_min>
+	<random_max>62</random_max>
+<angular_vel>3.95</angular_vel>
 <player>
 		<flip_src>1</flip_src>
 	<contour>
-			<kinect_tilt>14.2653</kinect_tilt>
+			<kinect_tilt>4.2653</kinect_tilt>
 			<kinect_near>243.291</kinect_near>
-			<kinect_far>114.49</kinect_far>
+			<kinect_far>118.393</kinect_far>
 			<opacity>96.2755</opacity>
 			<step_size>1</step_size>
-			<simplify>3.98039</simplify>
+			<simplify>2.14375</simplify>
 			<curved_vertex>0</curved_vertex>
-			<pos_x>91.8367</pos_x>
-			<pos_y>-122.449</pos_y>
-			<width>1285.71</width>
-			<height>969.388</height>
+			<pos_x>30.6122</pos_x>
+			<pos_y>0</pos_y>
+			<width>1030.61</width>
+			<height>775.51</height>
 		</contour>
 		<motion>
 			<test_force>811.224</test_force>
-		<min_distance>5</min_distance>
+		<min_distance>27.1684</min_distance>
 		</motion>
 	</player>
 <game>
-		<targets_per_sec>5.775</targets_per_sec>
-	<score_x>310</score_x>
-		<score_y>195</score_y>
-	<time_x>1212.5</time_x>
+		<targets_per_sec>1.5</targets_per_sec>
+	<score_x>35</score_x>
+		<score_y>60</score_y>
+	<time_x>887.5</time_x>
 		<hp_duration>1.58</hp_duration>
 	<score_drifting>0.83</score_drifting>
 	</game>
 <contour>
-		<kinect_tilt>14.2653</kinect_tilt>
+		<kinect_tilt>4.2653</kinect_tilt>
 		<kinect_near>243.291</kinect_near>
-		<kinect_far>114.49</kinect_far>
+		<kinect_far>118.393</kinect_far>
 		<opacity>96.2755</opacity>
 		<step_size>1</step_size>
-		<simplify>3.98039</simplify>
+		<simplify>2.14375</simplify>
 		<curved_vertex>0</curved_vertex>
-		<pos_x>91.8367</pos_x>
-		<pos_y>-122.449</pos_y>
-		<width>1285.71</width>
-		<height>969.388</height>
+		<pos_x>30.6122</pos_x>
+		<pos_y>0</pos_y>
+		<width>1030.61</width>
+		<height>775.51</height>
 	</contour>
 <motion>
-		<test_force>811.224</test_force>
-		<min_distance>17.0918</min_distance>
+		<test_force>469.388</test_force>
+		<min_distance>27.1684</min_distance>
 	</motion>
 </canon>
