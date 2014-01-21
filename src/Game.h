@@ -87,10 +87,14 @@ private:
 	ofxTimer pictureTimer;
 	bool eTakePicture, eStartGame, eGameDone;
 	int pictureCount;
-	list<HighScore> highscores;
+	vector<HighScore> highscores;
 	ofImage winnerImg;
 
 	ofxTimer showHighscoreTimer, restartGameTimer;
+
+	static bool highscoreCompare(const HighScore & l, const HighScore & r){
+		return l.points >= r.points;
+	}
 };
 
 } /* namespace Box2dArena */

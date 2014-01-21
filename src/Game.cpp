@@ -1,5 +1,6 @@
 #include "Game.h"
 #include "Player.h"
+#include "math.h"
 
 namespace Box2dArena {
 
@@ -179,6 +180,8 @@ void Game::takePicture() {
 			+ ".png";
 	winnerImg.saveImage("highscores/" + filename);
 	highscores.push_back(HighScore(totalPoints, winnerImg));
+	int maxSize = min<int>((int)highscores.size(),10);
+	partial_sort(highscores.begin(),highscores.begin()+maxSize,highscores.end(),Game::highscoreCompare);
 }
 
 void Game::draw() {
@@ -255,7 +258,7 @@ void Game::drawHighscores() {
 	highscoreHeadlineFont.drawString("HIGHSCORE",ofGetWidth()/2.f-bb.width/2.f,90);
 	ofPopStyle();
 
-	list<HighScore>::iterator it = highscores.begin();
+	vector<HighScore>::iterator it = highscores.begin();
 	int i = 0;
 	ofPushMatrix();
 	ofTranslate(highScoreX, highScoreY);
