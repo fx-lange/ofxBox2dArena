@@ -6,7 +6,7 @@ namespace Box2dArena {
 
 Game::Game() :
 		canonPtr(NULL), playerPtr(NULL), targetsToShoot(0), tLastUpdate(-1), bPause(
-				true), totalTime(3), totalPoints(0), mode(0), gamemode(GAME), eTakePicture(
+				true), totalTime(15), totalPoints(0), mode(0), gamemode(GAME), eTakePicture(
 				false), eStartGame(false), eGameDone(false), pictureCount(0), tmpNr(
 				0), bWaitForAction(false), bGettingReady(false) {
 }

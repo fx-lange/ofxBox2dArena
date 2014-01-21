@@ -35,6 +35,7 @@
 			<pos_y>0</pos_y>
 			<width>1030.61</width>
 			<height>775.51</height>
+		<scale>1.5</scale>
 		</contour>
 		<motion>
 			<test_force>811.224</test_force>
@@ -82,6 +83,7 @@
 		<pos_y>0</pos_y>
 		<width>1030.61</width>
 		<height>775.51</height>
+	<scale>1.5</scale>
 	</contour>
 <motion>
 		<test_force>811.224</test_force>
