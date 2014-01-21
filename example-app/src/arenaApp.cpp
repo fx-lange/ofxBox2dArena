@@ -45,8 +45,10 @@ void arenaApp::draw() {
 	ofScale(scale, scale);
 	ofTranslate(-ofGetWidth() / 2.f, -ofGetHeight() / 2.f);
 
-	arena.draw();
-	player.draw(bDrawDebug);
+	if(game.isInGameMode()){
+		arena.draw();
+		player.draw(bDrawDebug);
+	}
 	game.draw();
 
 	if (bDrawDebug) {

@@ -6,7 +6,7 @@ namespace Box2dArena {
 Game::Game() :
 		canonPtr(NULL), playerPtr(NULL), targetsToShoot(0), tLastUpdate(-1), bPause(
 				true), totalTime(3), totalPoints(0), mode(0), gamemode(GAME), eTakePicture(
-				false), pictureCount(0) {
+				false), eStartGame(false), eGameDone(false), pictureCount(0) {
 }
 
 Game::~Game() {
@@ -32,6 +32,15 @@ void Game::setup(TargetCanon * canon, Player * player, string fontName) {
 	pictureTimer.stopTimer();
 	ofAddListener(pictureTimer.TIMER_REACHED, this, &Game::eventTakePicture);
 	winnerImg.allocate(frameW, frameH, OF_IMAGE_COLOR);
+
+	showHighscoreTimer.setup(5 * 1000, false);
+	showHighscoreTimer.stopTimer();
+	ofAddListener(showHighscoreTimer.TIMER_REACHED, this, &Game::eventShowGame);
+
+	restartGameTimer.setup(5 * 1000, false);
+	restartGameTimer.stopTimer();
+	ofAddListener(restartGameTimer.TIMER_REACHED, this,
+			&Game::eventRestartGame);
 
 	setupGui();
 }
@@ -60,7 +69,9 @@ void Game::setupGui() {
 	highscorePanel.add(frameH.setup("frame H", 500, 0, 2000));
 	highscorePanel.add(totalPointsX.setup("points X", 500, 0, 2000));
 	highscorePanel.add(totalPointsY.setup("points Y", 500, 0, 2000));
-	highscorePanel.add(highScoreLineH.setup("hs line height",100,1,250));
+	highscorePanel.add(highScoreLineH.setup("hs line height", 100, 1, 250));
+	highscorePanel.add(highScoreX.setup("highScore X", 0, -1500, 1500));
+	highscorePanel.add(highScoreX.setup("highScore Y", 0, -1500, 1500));
 	gui.add(&highscorePanel);
 	gui.loadFromFile("arena.xml");
 
@@ -70,11 +81,24 @@ void Game::setupGui() {
 }
 
 void Game::update() {
+	if (eGameDone) {
+		eGameDone = false;
+		totalPoints = score.getTotal();
+		pauseGame(true);
+		cout << "TOTAL: " << totalPoints << endl;
+		gamemode = PICTURE;
+		return;
+	}
+
 	if (bPause) {
 		if (eTakePicture) {
 			eTakePicture = false;
 			takePicture();
 			gamemode = HIGHSCORE;
+		}
+		if (eStartGame) {
+			eStartGame = false;
+			gamemode = GAME;
 		}
 		return;
 	}
@@ -108,23 +132,45 @@ void Game::update() {
 	score.update(hitPointDuration, scoreDrifting);
 }
 
+void Game::pauseGame(bool pause) {
+	score.stopCounting(pause);
+	if (pause == false) {
+		mode = 0;
+		canonPtr->resetMode();
+		//TODO use restart COUNTDOWN here instead!
+		gameTime.reset();
+		gameTime.startTimer();
+		tLastUpdate = -1;
+	}
+	bPause = pause;
+}
+
 void Game::gameDone(ofEventArgs & e) {
-	totalPoints = score.getTotal();
-	pauseGame(true);
-	cout << "TOTAL: " << totalPoints << endl;
-	gamemode = PICTURE;
+	eGameDone = true;
+	pictureTimer.reset();
 	pictureTimer.startTimer();
 }
 
 void Game::eventTakePicture(ofEventArgs & e) {
 	eTakePicture = true;
-	pictureTimer.reset();
-	pictureTimer.pauseTimer();
+	showHighscoreTimer.reset();
+	showHighscoreTimer.startTimer();
+}
+
+void Game::eventShowGame(ofEventArgs & e) {
+	eStartGame = true;
+	restartGameTimer.reset();
+	restartGameTimer.startTimer();
+}
+
+void Game::eventRestartGame(ofEventArgs & e) {
+	pauseGame(false);
 }
 
 void Game::takePicture() {
 	ofxCvColorImage & colorImg = playerPtr->getColorImg();
 	colorImg.setROI(frameX, frameY, frameW, frameH);
+	winnerImg.allocate(frameW,frameH,OF_IMAGE_COLOR);
 	winnerImg.setFromPixels(colorImg.getRoiPixelsRef());
 	colorImg.resetROI();
 	string filename = ofToString(++pictureCount) + "_" + ofToString(totalPoints)
@@ -185,48 +231,45 @@ void Game::drawPicture(bool debug) {
 		ofSetColor(255, 0, 0);
 		ofPushMatrix();
 		ofTranslate(winnerImgX, winnerImgY);
+		ofScale(winnerImgScale, winnerImgScale);
 		ofRect(frameX, frameY, frameW, frameH);
 		ofPopMatrix();
 	}
 	ofPopStyle();
 }
 
-void Game::drawHighscores(){
-	//TODO draw headliner image
-	ofSetColor(255);
+void Game::drawHighscores() {
+	//TODO black + transparent rect - schrift 188,255
 	list<HighScore>::iterator it = highscores.begin();
 	int i = 0;
-	for(;it!=highscores.end();++it,++i){
+	ofPushMatrix();
+	ofTranslate(highScoreX, highScoreY);
+	for (; it != highscores.end(); ++it, ++i) {
+		ofSetColor(255);
 		ofPushMatrix();
-		ofTranslate(0,highScoreLineH*i);
+		ofTranslate(0, highScoreLineH * i + (i*5));
 		ofPushMatrix();
 		float scale = highScoreLineH / it->image.height;
-		ofScale(scale,scale);
-		it->image.draw(0,0);
+		ofScale(scale, scale);
+		it->image.draw(0, 0);
 		ofPopMatrix();
 		ofSetColor(220, 27, 42);
-		highscoreFont.drawString(ofToString(it->points),it->image.width * scale + 42,0);
+		highscoreFont.drawString(ofToString(it->points),
+				it->image.width * scale + 42, 0);
 		ofSetColor(245, 191, 42);
-		highscoreFont.drawString(ofToString(it->points),it->image.width * scale + 40,-2);
+		highscoreFont.drawString(ofToString(it->points),
+				it->image.width * scale + 40, -2);
 		ofPopMatrix();
 	}
-}
-
-void Game::pauseGame(bool pause) {
-	score.stopCounting(pause);
-	if (pause == false) {
-		mode = 0;
-		canonPtr->resetMode();
-		//TODO use restart COUNTDOWN here instead!
-		gameTime.reset();
-		gameTime.startTimer();
-		tLastUpdate = -1;
-	}
-	bPause = pause;
+	ofPopMatrix();
 }
 
 Score * Game::getScore() {
 	return &score;
+}
+
+bool Game::isInGameMode() {
+	return gamemode == GAME;
 }
 
 } /* namespace Box2dArena */

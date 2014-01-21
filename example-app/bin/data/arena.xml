@@ -64,6 +64,8 @@
 			<frame_H>285.714</frame_H>
 		<points_X>867.347</points_X>
 			<points_Y>724.49</points_Y>
+		<hs_line_height>100</hs_line_height>
+			<highScore_Y>0</highScore_Y>
 		</highscore>
 	</game>
 <contour>
@@ -80,7 +82,7 @@
 		<height>775.51</height>
 	</contour>
 <motion>
-		<test_force>469.388</test_force>
+		<test_force>811.224</test_force>
 		<min_distance>27.1684</min_distance>
 	</motion>
 <canon3>
@@ -125,5 +127,7 @@
 		<frame_H>285.714</frame_H>
 	<points_X>867.347</points_X>
 		<points_Y>724.49</points_Y>
+	<hs_line_height>100</hs_line_height>
+		<highScore_Y>0</highScore_Y>
 	</highscore>
 </canon>

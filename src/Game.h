@@ -40,6 +40,11 @@ public:
 	void eventTakePicture(ofEventArgs & e);
 	void takePicture();
 
+	void eventShowGame(ofEventArgs & e);
+	void eventRestartGame(ofEventArgs & e);
+
+	bool isInGameMode();
+
 	Score * getScore();
 
 	ofxPanel gui;
@@ -80,10 +85,12 @@ private:
 	ofImage templateImg;
 
 	ofxTimer pictureTimer;
-	bool eTakePicture;
+	bool eTakePicture, eStartGame, eGameDone;
 	int pictureCount;
 	list<HighScore> highscores;
 	ofImage winnerImg;
+
+	ofxTimer showHighscoreTimer, restartGameTimer;
 };
 
 } /* namespace Box2dArena */
