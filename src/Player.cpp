@@ -92,7 +92,7 @@ bool Player::updateKinect() {
 		//TODO try both thresholds on binaryImg without far&near
 		//TODO /erode derode?!
 
-		contourFinder.findContours(binaryImg, 10,
+		contourFinder.findContours(binaryImg, 200,
 				(kinect.width * kinect.height) / 2, 20, true, true);//TODO GUI
 		//TODO holes! learning opencv page 237! use different sorting and find way to draw poly with hole
 		//http://forum.openframeworks.cc/t/circles-with-holes-or-with-stroke/8173/3
@@ -193,7 +193,7 @@ void Player::drawContour(bool debug) {
 		ofEndShape(false);
 	}
 
-	ofSetColor(220, 220, 20, 60);
+	ofSetColor(220, 220, 20, 120);
 	ofSetRectMode(OF_RECTMODE_CORNER);
 	silhouettesImg.draw(0, 0);
 
