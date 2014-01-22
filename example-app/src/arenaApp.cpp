@@ -19,6 +19,7 @@ void arenaApp::setup() {
 
 	arena.setup();
 	arena.loadBackground("arena_wall.png");
+//	arena.loadBackground("wall.jpg");
 	canon.setup(&arena);
 	game.setup(&canon,&player,"GovtAgentBB.ttf");
 	player.setup(&arena,game.getScore());
@@ -49,8 +50,8 @@ void arenaApp::draw() {
 	ofScale(scale, scale);
 	ofTranslate(-ofGetWidth() / 2.f, -ofGetHeight() / 2.f);
 
+	arena.drawBg();
 	if(game.isInGameMode()){
-		arena.drawBg();
 		if(!bNoPlayer)
 			player.draw(bDrawDebug);
 		arena.drawTargets();

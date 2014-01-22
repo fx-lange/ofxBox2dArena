@@ -24,12 +24,12 @@
 <player>
 		<flip_src>1</flip_src>
 	<contour>
-			<kinect_tilt>-3.7347</kinect_tilt>
+			<kinect_tilt>-2.7347</kinect_tilt>
 			<kinect_near>187.347</kinect_near>
 			<kinect_far>45.5357</kinect_far>
-			<opacity>111.888</opacity>
+			<opacity>148.316</opacity>
 			<step_size>1</step_size>
-			<simplify>2.14375</simplify>
+			<simplify>2.34782</simplify>
 			<curved_vertex>0</curved_vertex>
 			<pos_x>-30.6122</pos_x>
 			<pos_y>0</pos_y>
@@ -38,7 +38,7 @@
 		<scale>1.69898</scale>
 		</contour>
 		<motion>
-			<test_force>331.633</test_force>
+			<test_force>311.224</test_force>
 		<min_distance>5</min_distance>
 		</motion>
 	</player>
@@ -64,20 +64,20 @@
 			<frame_W>367.347</frame_W>
 			<frame_H>234.694</frame_H>
 		<points_X>540.816</points_X>
-			<points_Y>653.061</points_Y>
+			<points_Y>673.469</points_Y>
 		<hs_line_height>100</hs_line_height>
 			<highScore_Y>107.143</highScore_Y>
-		<highScore_X>107.143</highScore_X>
+		<highScore_X>122.449</highScore_X>
 			<col_offset>482.143</col_offset>
 		</highscore>
 	</game>
 <contour>
-		<kinect_tilt>-3.7347</kinect_tilt>
+		<kinect_tilt>-2.7347</kinect_tilt>
 		<kinect_near>187.347</kinect_near>
 		<kinect_far>45.5357</kinect_far>
-		<opacity>122.296</opacity>
+		<opacity>148.316</opacity>
 		<step_size>1</step_size>
-		<simplify>2.14375</simplify>
+		<simplify>2.34782</simplify>
 		<curved_vertex>0</curved_vertex>
 		<pos_x>-30.6122</pos_x>
 		<pos_y>0</pos_y>
@@ -86,8 +86,8 @@
 	<scale>1.69898</scale>
 	</contour>
 <motion>
-		<test_force>331.633</test_force>
-		<min_distance>19.1071</min_distance>
+		<test_force>311.224</test_force>
+		<min_distance>5</min_distance>
 	</motion>
 <canon3>
 		<density>1.175</density>
@@ -130,10 +130,10 @@
 		<frame_W>367.347</frame_W>
 		<frame_H>234.694</frame_H>
 	<points_X>540.816</points_X>
-		<points_Y>653.061</points_Y>
+		<points_Y>673.469</points_Y>
 	<hs_line_height>100</hs_line_height>
 		<highScore_Y>107.143</highScore_Y>
-	<highScore_X>107.143</highScore_X>
+	<highScore_X>122.449</highScore_X>
 		<col_offset>482.143</col_offset>
 	</highscore>
 </canon>
